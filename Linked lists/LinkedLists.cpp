@@ -1,11 +1,14 @@
 #include <iostream>
-#include <fstream>
+#include <fstream> // For reading/writing files
 #include <string>
 #include <list>
-#include <chrono>
+#include <chrono> // For time measuring
+#include <omp.h> // OpenMultiProcessing library for parallel programming
 
 using namespace std;
 using namespace chrono;
+
+const int NUM_THREADS = 4;
 
 struct Timer
 {
@@ -50,6 +53,7 @@ void quickSort(list<int>& unsorted)
 
 int main()
 {
+    omp_set_num_threads(NUM_THREADS);
     fstream myfile;
     myfile.open("Test 1.csv");
     string line;
@@ -59,7 +63,12 @@ int main()
     while(getline(myfile, line))
         elements.push_back(stoi(line));
 
-    bubbleSort(elements);
+    #pragma omp parallel
+    {
+        bubbleSort(elements);
+        insertSort(elements);
+        quickSort(elements);
+    }
 
     myfile.close();
 
