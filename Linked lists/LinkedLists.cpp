@@ -34,14 +34,26 @@ struct Timer
         elapsed_time = end - start;
         float ms = elapsed_time.count()*1000.0f;
 
-        cout << "The algorithm " << name_of_algorithm << " took " << ms << "ms to execute.";
+        cout << "The algorithm " << name_of_algorithm << " took " << ms << "ms to execute.\n";
     }
 };
 
-void bubbleSort(list<int>& unsorted)
+void bubbleSort(int* elementsArray, int size)
 {
-    Timer("Bubble Sort");
-    // Dimzog's task
+    Timer t = Timer("Bubble Sort");
+    
+    for(int k = 1; k < size; k++)
+    {
+        for(int j = size-1; j >= k; j--)
+        {
+            if(elementsArray[j-1] > elementsArray[j])
+            {
+                int value = elementsArray[j-1];
+                elementsArray[j-1] = elementsArray[j];
+                elementsArray[j] = value;
+            }
+        }
+    }
 }
 
 void insertSort(list<int>& unsorted)
@@ -50,9 +62,12 @@ void insertSort(list<int>& unsorted)
     // Dimzog's task
 }
 
-void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List)
+void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List, bool firstTime)
 {
-    Timer("Quick Sort");
+    // makes sure the timer gets called only once for the first recursion
+    if (firstTime)
+        Timer t = Timer("Quick Sort");
+
     // Check Length
     if(left >= right)
         return;
@@ -83,44 +98,69 @@ void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List)
             j--;
         }
     }
-    quickSort(unsorted,left,j,Swap_List);
-    quickSort(unsorted,i,right,Swap_List);
+    quickSort(unsorted,left,j,Swap_List, false);
+    quickSort(unsorted,i,right,Swap_List, false);
 }
 
-
-int main()
+void initializeArray(list<int>& elementsList, int* elementsArray)
 {
-    //omp_set_num_threads(NUM_THREADS);
+    int i = 0;
+
+    for(int element: elementsList){
+        elementsArray[i] = int(element);
+        i++;
+    }
+}
+
+list<int> initializeList()
+{
     fstream myfile;
     myfile.open("Test 1.csv");
     string line;
     list<int> elements;
-    int i = 0;
-    list<Swap_Pos> Swap_List;
+    
     while(getline(myfile, line))
         elements.push_back(stoi(line));
 
-    // Conevert to Array for Quicksort Efficiency
-    int size_l = elements.size();
-    int* elements_array = (int*) malloc(size_l*sizeof(elements.front()));
-    for(int element: elements){
-        elements_array[i] = int(element);
-        i++;
-    }
     myfile.close();
-    quickSort(&elements_array[0],0,elements.size(),Swap_List);
-    //#pragma omp parallel
-    //{
-        //bubbleSort(elements);
-        //insertSort(elements);
-     //   quickSort(&elements_array[0],0,i);
-    //}
-    for(int k = 0;k < elements.size();k++){
-       cout << elements_array[k] << "\n"; 
-    }
-    for (auto it = Swap_List.begin(); it != Swap_List.end(); ++it){
-    cout <<"(" << it->New_pos << "," << it->Old_pos << ")";
+
+    return elements;
+}
+
+void printElements(int* elementsArray, int elementsSize, list<Swap_Pos>& Swap_List)
+{
+    for(int k = 0; k < elementsSize; k++) {
+       cout << elementsArray[k] << "\n";
     }
 
+        for (auto it = Swap_List.begin(); it != Swap_List.end(); ++it) {
+    cout <<"(" << it->New_pos << "," << it->Old_pos << ")";
+    }
+}
+
+int main()
+{
+    //omp_set_num_threads(NUM_THREADS);
+    list<int> elementsList = initializeList();
+    // Convert to Array for Quicksort Efficiency
+    int elementsSize = elementsList.size();
+    int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
+    initializeArray(elementsList, elementsArray);
+
+    list<Swap_Pos> Swap_List;
+
+    //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
+    bubbleSort(elementsArray, elementsSize);
+
+    //#pragma omp parallel
+    /*{
+        bubbleSort(elementsList);
+        insertSort(elementsList);
+        quickSort(&elementsList_array[0],0,i);
+    }*/
+    printElements(elementsArray, elementsSize, Swap_List);
+
+    free(elementsArray);
+    
     return 0;
 }
