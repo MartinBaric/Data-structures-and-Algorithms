@@ -62,6 +62,59 @@ void insertSort(list<int>& unsorted)
     // Dimzog's task
 }
 
+// Merge two sorted arrays (todo lists as a second variant)
+
+void merge_sorted_Array(int* unsorted,int* left_array,int* right_array, int arr_size)
+    {
+        int i = 0;
+        int j = 0;
+        int Divide_index = (arr_size)/2;
+        while(i+j<arr_size&(i < Divide_index)&(j<arr_size-Divide_index)){
+            if(left_array[i]>right_array[j]){
+                unsorted[i+j] = right_array[j];
+                j++;
+            }
+            else{
+                unsorted[i+j] = left_array[i];
+                i++;
+            } 
+        }
+        if(i == Divide_index){
+            for(int k = j;k < arr_size-Divide_index;k++){
+                unsorted[i+k] = right_array[k];
+            }
+        }
+        else if(j == arr_size-Divide_index){
+            for(int k = i;k < Divide_index;k++){
+                unsorted[k+j] = left_array[k];
+            }
+        }
+    }
+
+void mergeSort(int* unsorted,int arr_size){
+    int Divide_index = (arr_size)/2;
+    int size_right = arr_size-Divide_index;
+    // If the unsorted array is of size 1 
+    if(Divide_index == 0){
+        return;
+    } 
+    else{
+        int* left_arr = (int*) malloc(Divide_index*sizeof(int));
+        int* right_arr = (int*) malloc(size_right*sizeof(int));
+        for(int i = 0;i < Divide_index;i++ ){
+            left_arr[i] = unsorted[i];
+        }
+        for(int i = Divide_index;i < arr_size;i++){
+            right_arr[i-Divide_index] = unsorted[i];
+        }
+        mergeSort(left_arr,Divide_index);
+        mergeSort(right_arr,size_right);
+        merge_sorted_Array(unsorted,left_arr,right_arr,arr_size);
+        free(left_arr);
+        free(right_arr);
+    }
+}
+
 void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List, bool firstTime)
 {
     // makes sure the timer gets called only once for the first recursion
@@ -101,6 +154,8 @@ void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List, bool
     quickSort(unsorted,left,j,Swap_List, false);
     quickSort(unsorted,i,right,Swap_List, false);
 }
+
+
 
 void initializeArray(list<int>& elementsList, int* elementsArray)
 {
@@ -150,8 +205,8 @@ int main()
     list<Swap_Pos> Swap_List;
 
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
-    bubbleSort(elementsArray, elementsSize);
-
+    //bubbleSort(elementsArray, elementsSize);
+    mergeSort(elementsArray, elementsSize);
     //#pragma omp parallel
     /*{
         bubbleSort(elementsList);
