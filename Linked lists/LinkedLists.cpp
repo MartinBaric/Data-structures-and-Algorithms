@@ -115,10 +115,10 @@ void mergeSort(int* unsorted,int arr_size){
     }
 }
 
-void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List, bool firstTime)
+void quickSort(int* unsorted,int left, int right,list<Swap_Pos>& Swap_List, bool firstRecursion)
 {
     // makes sure the timer gets called only once for the first recursion
-    if (firstTime)
+    if (firstRecursion)
         Timer t = Timer("Quick Sort");
 
     // Check Length
