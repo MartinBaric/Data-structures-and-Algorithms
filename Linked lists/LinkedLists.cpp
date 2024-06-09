@@ -11,6 +11,74 @@ using namespace chrono;
 
 const int NUM_THREADS = 4;
 
+template <typename T> class Node
+{
+private:
+    Node* left;
+    Node* right;
+    T data;
+
+public:
+
+    Node(T value)
+    {
+        this.data = value;
+        left = right = NULL;    
+    }
+
+    T get_value()
+    {
+        return this->data;
+    }
+
+    bool left_NULL()
+    {
+        if (this->left == NULL)
+            return true;
+        else return false;
+    }
+};
+
+template <typename T> class BST
+{
+    private:
+        Node<T>* root;
+        int counter;
+    
+    public:
+        BST(Node<T>* first_node)
+        {
+            this->root = first_node;
+            counter = 1;
+        }
+
+    
+        void add_node(T value, int index)
+        {
+            if(index == 0)
+            {
+                index = counter;
+            }
+
+            if(index == 1)
+                this.left = new Node(value); 
+            else if(index == 2)
+                this.right = new Node(value);
+            else if(index % 2 == 0)
+                this->left.add_node(T value, index/2);
+            else if(index % 2 == 1)
+                this->right.add_node(T value, index/2);
+        }
+
+        void print_values()
+        {
+            cout << root->get_value() << "\n";
+            if(left_NULL == false)
+                root->
+        }
+
+};
+
 struct Swap_Pos{
     int Old_pos; 
     int New_pos;  
@@ -203,6 +271,10 @@ int main()
     initializeArray(elementsList, elementsArray);
 
     list<Swap_Pos> Swap_List;
+    Node<int> *n = new Node(10);
+    n->left = Node(5);
+    //n.data = 19;
+
 
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
     //bubbleSort(elementsArray, elementsSize);
