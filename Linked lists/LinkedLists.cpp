@@ -19,12 +19,12 @@ private:
     T data;
 
 public:
-
     Node(T value)
     {
         this.data = value;
         left = right = NULL;    
     }
+
 
     T get_value()
     {
@@ -37,8 +37,37 @@ public:
             return true;
         else return false;
     }
+    void print_value()
+        {
+            cout << get_value() << "\n";
+        }
+    void inorder()
+        {
+            if(left!=NULL)
+                left->inorder();
+            print_value();
+            if(right!=Null)
+                right->inorder(); 
+        }
+     void preorder()
+        {
+            print_value();
+            if(left!=NULL)
+                left->preorder();
+            if(right!=Null)
+                right->preorder(); 
+        }
+     void postorder()
+        {
+            if(left!=NULL)
+                left->postorder();
+            if(right!=Null)
+                right->postorder();
+            print_value(); 
+        }
 };
 
+/*
 template <typename T> class BST
 {
     private:
@@ -69,15 +98,8 @@ template <typename T> class BST
             else if(index % 2 == 1)
                 this->right.add_node(T value, index/2);
         }
-
-        void print_values()
-        {
-            cout << root->get_value() << "\n";
-            if(left_NULL == false)
-                root->
-        }
-
 };
+*/
 
 struct Swap_Pos{
     int Old_pos; 
