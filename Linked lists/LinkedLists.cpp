@@ -21,8 +21,13 @@ private:
 public:
     Node(T value)
     {
-        this.data = value;
+        this->data = value;
         left = right = NULL;    
+    }
+
+    ~Node()
+    {
+        cout << "Das gewünschte Datum wurde gelöscht\n";
     }
 
 
@@ -46,7 +51,7 @@ public:
             if(left!=NULL)
                 left->inorder();
             print_value();
-            if(right!=Null)
+            if(right!=NULL)
                 right->inorder(); 
         }
      void preorder()
@@ -54,17 +59,64 @@ public:
             print_value();
             if(left!=NULL)
                 left->preorder();
-            if(right!=Null)
+            if(right!=NULL)
                 right->preorder(); 
         }
      void postorder()
         {
             if(left!=NULL)
                 left->postorder();
-            if(right!=Null)
+            if(right!=NULL)
                 right->postorder();
             print_value(); 
         }
+
+    void insert(T datum)
+    {
+        if (this->data < datum)
+        {
+            if(this->right != NULL)
+                this->right->insert(datum);
+            else{
+                Node<T>* n = new Node(datum);
+                this->right = n;
+            }
+        }
+        else if (this->data > datum)
+        {
+            if(this->left != NULL)
+                this->left->insert(datum);
+            else{
+                Node<T>* n = new Node(datum);
+                this->left = n;
+            }
+        }
+    }
+
+    void deleteNode(T datum)
+    {
+        if (this->data == datum)
+        {
+            //this->~Node();
+            delete this;
+        }
+        else if (this->data > datum)
+        {
+            if(this->left != NULL)
+                this->left->deleteNode(datum);
+            else{
+               cout << "Das gewünschte Datum existiert nicht.\n";
+            }
+        }
+        else if (this->data < datum)
+        {
+            if(this->right != NULL)
+                this->right->deleteNode(datum);
+            else{
+               cout << "Das gewünschte Datum existiert nicht.\n";
+            }
+        }
+    }
 };
 
 /*
@@ -293,21 +345,28 @@ int main()
     initializeArray(elementsList, elementsArray);
 
     list<Swap_Pos> Swap_List;
-    Node<int> *n = new Node(10);
-    n->left = Node(5);
+    Node<int> *root = new Node(12);
+    root->insert(11);
+    root->insert(10);
+    root->insert(7);
+    root->insert(5);
+    root->deleteNode(4);
+    root->inorder();
+    root->deleteNode(5);
+    root->inorder();
     //n.data = 19;
 
 
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
     //bubbleSort(elementsArray, elementsSize);
-    mergeSort(elementsArray, elementsSize);
+    //mergeSort(elementsArray, elementsSize);
     //#pragma omp parallel
     /*{
         bubbleSort(elementsList);
         insertSort(elementsList);
         quickSort(&elementsList_array[0],0,i);
     }*/
-    printElements(elementsArray, elementsSize, Swap_List);
+    //printElements(elementsArray, elementsSize, Swap_List);
 
     free(elementsArray);
     
