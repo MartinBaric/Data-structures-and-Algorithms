@@ -117,14 +117,23 @@ public:
             else if (this->right != NULL)
                 {
                 Node<T>* Pt_parent = this;
-                Node<T>* Pt_successor = this->right;  
+                Node<T>* Pt_successor = this->right; 
+                // Aux Variable set true if next succassor is in the right node
+                bool If_Root = true; 
                 while(Pt_successor->left!=NULL) 
                     {   
+                        If_Root = false; //set to false if next successor is the left branch of the right node
                         Pt_parent = Pt_successor;
                         Pt_successor = Pt_successor->left;
                     }
-                Pt_parent->left = Pt_successor->right;
+                // Overwrite data to be deleted with next leftmost successor
                 this->data = Pt_successor->data;
+                // Reset Pointer to avoid memory issues
+                if(If_Root == false)
+                    Pt_parent->left = Pt_successor->right;
+                else
+                    Pt_parent->right = NULL;
+                // Delete Leaf
                 delete Pt_successor;
                 }
 
@@ -378,14 +387,18 @@ int main()
     initializeArray(elementsList, elementsArray);
 
     list<Swap_Pos> Swap_List;
-    Node<int> *root = new Node<int>(12);
-    root->insert(11);
+    Node<int> *root = new Node<int>(11);
     root->insert(10);
+    root->insert(12);
     root->insert(7);
     root->insert(5);
     root->deleteNode(4);
     root->inorder();
-    root->deleteNode(5);
+    root->deleteNode(11);
+    root->insert(13);
+    root->insert(11);
+    root->inorder();
+    root->deleteNode(10);
     root->inorder();
     //n.data = 19;
 
