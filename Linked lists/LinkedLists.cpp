@@ -93,17 +93,50 @@ public:
         }
     }
 
-    void deleteNode(T datum)
+   void deleteNode(T datum)
     {
         if (this->data == datum)
         {
-            //this->~Node();
-            delete this;
+            if (this->right == NULL)
+                {
+                Node<T>* Aux = this->left;
+                if(Aux == NULL)
+                {
+                    // Return NULL pointer to parent to avoid memory error 
+                    // TODO Check other cases (May be not elegant solution)
+                    delete this;
+                    this->data = NULL;
+                }
+                else{
+                    this->data = Aux->data;
+                    this->left = Aux->left;
+                    this->right = Aux->right;
+                }
+                delete Aux;
+                }
+            else if (this->right != NULL)
+                {
+                Node<T>* Pt_parent = this;
+                Node<T>* Pt_successor = this->right;  
+                while(Pt_successor->left!=NULL) 
+                    {   
+                        Pt_parent = Pt_successor;
+                        Pt_successor = Pt_successor->left;
+                    }
+                Pt_parent->left = Pt_successor->right;
+                this->data = Pt_successor->data;
+                delete Pt_successor;
+                }
+
         }
         else if (this->data > datum)
         {
             if(this->left != NULL)
+            {
                 this->left->deleteNode(datum);
+                if(this->left->data == NULL)
+                    this->left = NULL; 
+            }
             else{
                cout << "Das gewünschte Datum existiert nicht.\n";
             }
@@ -345,7 +378,7 @@ int main()
     initializeArray(elementsList, elementsArray);
 
     list<Swap_Pos> Swap_List;
-    Node<int> *root = new Node(12);
+    Node<int> *root = new Node<int>(12);
     root->insert(11);
     root->insert(10);
     root->insert(7);
