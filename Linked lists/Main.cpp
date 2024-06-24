@@ -65,7 +65,7 @@ int main()
     int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     initializeArray(elementsList, elementsArray);
 
-    Node<int> *root = initializeTree(elementsList);//new Node<int>(11);
+    Node<int> *root = new Node<int>(11);//initializeTree(elementsList);//
     root->insert(10);
     root->insert(12);
     root->insert(7);

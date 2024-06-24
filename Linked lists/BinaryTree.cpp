@@ -1,4 +1,8 @@
-template <typename T> class Node
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class Node
 {
 private:
     Node* left;
@@ -23,15 +27,9 @@ public:
         return this->data;
     }
 
-    bool left_NULL()
-    {
-        if (this->left == NULL)
-            return true;
-        else return false;
-    }
     void print_value()
         {
-            cout << get_value() << "\n";
+            cout << get_value() << ",";
         }
     void inorder()
         {
@@ -92,7 +90,6 @@ public:
                     // Return NULL pointer to parent to avoid memory error 
                     // TODO Check other cases (May be not elegant solution)
                     delete this;
-                    //this->data = NULL;
                 }
                 else{
                     this->data = Aux->data;
@@ -119,7 +116,7 @@ public:
                 if(If_Root == false)
                     Pt_parent->left = Pt_successor->right;
                 else
-                    Pt_parent->right = NULL;
+                    Pt_parent->right = Pt_successor->right;
                 // Delete Leaf
                 delete Pt_successor;
                 }
