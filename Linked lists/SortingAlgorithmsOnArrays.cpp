@@ -1,14 +1,9 @@
 #include <list>
-#include <chrono>
+//#include <chrono>
 #include "Timer.cpp"
-
+#include "SwapPosition.h"
 using namespace std;
 using namespace chrono;
-
-struct Swap_Pos{
-    int Old_pos; 
-    int New_pos;  
-};
 
 void bubbleSort(int* elementsArray, int size)
 {
