@@ -5,7 +5,7 @@
 #include <omp.h> // OpenMultiProcessing library for parallel programming
 //#include <random>
 #include "SortingAlgorithmsOnArrays.cpp"
-#include "BinaryTree.cpp"
+#include "BinaryTree.h"
 
 using namespace std;
 

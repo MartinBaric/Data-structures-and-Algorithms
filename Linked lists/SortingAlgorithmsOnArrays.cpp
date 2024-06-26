@@ -1,6 +1,6 @@
 #include <list>
 #include <chrono>
-#include "timer.cpp"
+#include "Timer.cpp"
 
 using namespace std;
 using namespace chrono;
