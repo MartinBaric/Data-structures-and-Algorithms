@@ -1,8 +1,7 @@
 #include <list>
 //#include <chrono>
-#include "timer.cpp"
+#include "Timer.cpp"
 #include "SwapPosition.h"
-
 using namespace std;
 using namespace chrono;
 
