@@ -1,7 +1,9 @@
 #include <list>
 //#include <chrono>
-#include "Timer.cpp"
+#include "Timer.h"
 #include "SortingAlgorithmsOnArrays.h"
+#include "Swap_Position.h"
+
 using namespace std;
 using namespace chrono;
 
