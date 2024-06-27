@@ -1,14 +1,10 @@
 #pragma once
 
 #include <list>
-#include "Timer.cpp"
+#include "Timer.h"
+#include "Swap_Position.h"
 
 using namespace std;
-
-struct Swap_Pos{
-    int Old_pos; 
-    int New_pos;  
-};
 
 void bubbleSort(int* elementsArray, int size);
 void insertSort(list<int>& unsorted);
