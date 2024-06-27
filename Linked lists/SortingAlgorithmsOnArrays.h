@@ -1,7 +1,7 @@
 #pragma once
 
 #include <list>
-#include "timer.cpp"
+#include "Timer.cpp"
 
 using namespace std;
 
