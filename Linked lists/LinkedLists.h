@@ -6,7 +6,7 @@
 #include <list>
 //#include <random>
 #include "BinaryTree.h"
-#include "SwapPosition.h"
+#include "SortingAlgorithmsOnArrays.h"
 
 using namespace std;
 
@@ -27,12 +27,11 @@ list<T> initializeList()
 }
 
 template <class T>
-Node<T> initializeTree(list<T>& elementsList)
+Node<T>* initializeTree(list<T>& elementsList)
 {
-    Node root = NULL;
-
-    for(T element: elementsList){
-        root->insert(T);
+    Node<T>* root = new Node<T>(*(elementsList.begin()));
+    for(auto it = elementsList.begin();it!= --(--elementsList.end());++it ){
+        root->insert(*it);
     }
     return root;
 }

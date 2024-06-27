@@ -21,20 +21,21 @@ int main()
     int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     initializeArray(elementsList, elementsArray);
 
-    Node<int> *root = new Node<int>(11);//initializeTree(elementsList);//
-    root->insert(10);
-    root->insert(12);
-    root->insert(7);
-    root->insert(5);
-    root->deleteNode(4);
-    root->inorder();
+    //Node<int> *root = new Node<int>(11);
+    Node<int>* root = initializeTree(elementsList);
+    //root.insert(10);
+    //root.insert(12);
+    //root.insert(7);
+    //root.insert(5);
+    //root.deleteNode(4);
+    /*root->inorder();
     root->deleteNode(11);
     root->inorder();
     root->insert(13);
     root->inorder();
     root->insert(11);
     root->inorder();
-    root->deleteNode(10);
+    root->deleteNode(10); */
     root->inorder();
 
     //list<Swap_Pos> Swap_List;
