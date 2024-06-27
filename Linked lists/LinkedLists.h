@@ -27,9 +27,14 @@ list<T> initializeList()
 }
 
 template <class T>
-Node<T> initializeTree(list<int>& elementsList)
+Node<T> initializeTree(list<T>& elementsList)
 {
-    return NULL;
+    Node root = NULL;
+
+    for(T element: elementsList){
+        root->insert(T);
+    }
+    return root;
 }
 
 template <class T>
