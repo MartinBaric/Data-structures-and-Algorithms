@@ -10,8 +10,6 @@
 
 using namespace std;
 
-void initializeArray(list<int>& elementsList, int* elementsArray);
-
 template <class T>
 list<T> initializeList()
 {
@@ -31,7 +29,18 @@ list<T> initializeList()
 template <class T>
 Node<T> initializeTree(list<int>& elementsList)
 {
-    
+    return NULL;
 }
 
-void printElements(int* elementsArray, int elementsSize, list<Swap_Pos>& Swap_List);
+template <class T>
+void initializeArray(list<T>& elementsList, int* elementsArray)
+{
+    int i = 0;
+
+    for(T element: elementsList){
+        elementsArray[i] = int(element);
+        i++;
+    }
+}
+
+void printElements(int*, int, list<Swap_Pos>&);
