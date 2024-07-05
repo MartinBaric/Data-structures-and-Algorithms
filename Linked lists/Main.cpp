@@ -21,22 +21,25 @@ int main()
     int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     initializeArray(elementsList, elementsArray);
 
-    //Node<int> *root = new Node<int>(11);
-    Node<int>* root = initializeTree(elementsList);
-    //root.insert(10);
-    //root.insert(12);
-    //root.insert(7);
+    Node<int> *root = new Node<int>(11);
+    //Node<int>* root = initializeTree(elementsList);
+    root->insert(10);
+    root->insert(15);
+    root->insert(1);
+    root->insert(6);
+    root->insert(12);
+    root->insert(7);
+    root->inorder();
     //root.insert(5);
     //root.deleteNode(4);
-    /*root->inorder();
-    root->deleteNode(11);
-    root->inorder();
-    root->insert(13);
-    root->inorder();
-    root->insert(11);
-    root->inorder();
-    root->deleteNode(10); */
-    root->inorder();
+    //root->deleteNode(11);
+    //root->inorder();
+    //root->insert(13);
+    //root->inorder();
+    //root->insert(11);
+    //root->inorder();
+    //root->deleteNode(10); */
+    //root->inorder();
 
     //list<Swap_Pos> Swap_List;
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
@@ -51,6 +54,5 @@ int main()
     //printElements(elementsArray, elementsSize, Swap_List);
 
     free(elementsArray);
-    
     return 0;
 }
