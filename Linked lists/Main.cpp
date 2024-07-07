@@ -29,16 +29,17 @@ int main()
     root->insert(6);
     root->insert(12);
     root->insert(7);
-    root->inorder();
-    //root.insert(5);
-    //root.deleteNode(4);
-    //root->deleteNode(11);
     //root->inorder();
+    root->insert(5);
+    root->deleteNode(10);
+    root->deleteNode(15);
+    root->deleteNode(1);
+    root->inorder();
     //root->insert(13);
     //root->inorder();
     //root->insert(11);
     //root->inorder();
-    //root->deleteNode(10); */
+    //root->deleteNode(10); 
     //root->inorder();
 
     //list<Swap_Pos> Swap_List;

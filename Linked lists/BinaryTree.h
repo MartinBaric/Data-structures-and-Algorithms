@@ -18,13 +18,10 @@ public:
         this->data = value;
         left = right = NULL;    
     }
-
     ~Node()
     {
-        cout << "Das gewünschte Datum wurde gelöscht\n";
+        cout << "Data " << this->data << " removed from the tree\n";
     }
-
-
     T get_value()
     {
         return this->data;
@@ -70,8 +67,6 @@ public:
         Node* Current_Node = this;
         list<Node*> Q_level;
         Q_level.push_back(Current_Node);
-        //typename std::list<Node*>::iterator It = Q_level.begin();
-        //(*(It))->print_value();
         list<Node*> Q_next_level;
         // Auxiliary list that stores the adresses where new datum can be inserted --> sorted level by level from left to right. Inserting new element at begin() makes the binary tree balanced
         list<Node*> Aux_Balanance;
@@ -98,10 +93,7 @@ public:
                 ++It;
                 Q_level.pop_front();
             }
-            for(typename std::list<Node*>::iterator It_2 = Q_next_level.begin();It_2 != Q_next_level.end();++It_2)
-                {
-                    Q_level.push_front((*It_2));
-                }
+            Q_level.assign(Q_next_level.begin(),Q_next_level.end());
             Q_next_level.clear();
         }
         Current_Node = (*Aux_Balanance.begin());
@@ -110,13 +102,79 @@ public:
         else
             Current_Node->right = new Node(datum);
         Aux_Balanance.clear();
-        //delete(&Current_Node);
-        //delete(Q_level);
-        //delete(Q_next_level);
     }
 
-   void deleteNode(T datum)
-    {
-        ;//DIMA
+    // Auxiliary Variable Tree_Root to set the pointer of the parent after deleting child. Pointer to Pointer operator Node<T>** is used in order to avoid copying data and recursively adjust the pointers 
+   void deleteNode(T datum,Node<T>** Tree_Root = NULL)
+    {   
+        if (this->data == datum)
+        {
+            if (this->right == NULL)
+            {    
+                // If left and right node are NULL then delete NODE ( No problem with parent pointers due to root node) 
+                if(this->left == NULL)
+                {   
+                    // If deleted node is tree root then delete 
+                    if(Tree_Root == NULL)
+                    {   
+                        delete this;
+                        cout<< "Empty Binary Tree";
+                    }
+                    // If not Tree Root then move Pointer of parent to chile->left
+                    else
+                    {
+                        *Tree_Root = this->left;
+                        delete this;
+                    }
+                }
+                // If Left Node is not NULL then make left node as root 
+                else
+                {
+                    // Copy data to root node
+                    Node<T>* Aux = this->left;
+                    T value = this->data;
+                    this->data = Aux->data;
+                    this->left = Aux->left;
+                    Aux->data = value;
+                    delete Aux;
+                    // Set pointer to adress of node to be deleted to NUll
+
+                }
+            }
+            else if (this->right != NULL)
+            {
+                Node<T>* Aux_root = this;
+                Node<T>* Aux_right = this->right;
+                while(Aux_root->right->left != NULL & Aux_root->right->right != NULL)
+                {
+                    Aux_root = Aux_right;
+                    Aux_right = Aux_root->right;
+                }
+                // If the left node is NULL then right node is NULL by construction
+                if(Aux_right->left == NULL)
+                {
+                    T value = this->data;
+                    this->data = Aux_right->data;
+                    Aux_right->data =  value;
+                    Aux_root->right = NULL;
+                    delete(Aux_right);
+                }
+                else
+                {   
+                    this->data = Aux_right->left->data;
+                    Aux_root->right = NULL;
+                    Aux_right = Aux_right->left;
+                    delete(Aux_right);
+                }
+
+            }
+        }
+        else
+        {
+            if(this->left != NULL)
+                this->left->deleteNode(datum,Tree_Root = &(this->left));
+            if(this->right != NULL)
+                this->right->deleteNode(datum,Tree_Root = &(this->right));
+        }
     }
 };
