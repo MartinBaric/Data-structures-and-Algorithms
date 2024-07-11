@@ -2,6 +2,7 @@
 // C++ 11 Standard extend std library with next function 
 //#include <iterator>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
@@ -11,12 +12,14 @@ private:
     Node* left;
     Node* right;
     T data;
+    int height;
 
 public:
     Node(T value)
     {
         this->data = value;
-        left = right = NULL;    
+        left = right = NULL;
+        height = 0;    
     }
     ~Node()
     {
@@ -29,7 +32,67 @@ public:
 
     void print_value()
         {
-            cout << get_value() << ",";
+            cout <<  get_value() <<  ",";
+        }
+    void update_height()
+    {
+        this->height = 0;
+        Node<T>* Currrent_Node = this;
+        while(Currrent_Node->left != NULL)
+        {
+            this->height +=1;
+            Currrent_Node = Currrent_Node->left;
+        }
+    }
+
+    void print_tree()
+        {   
+        Node* Current_Node = this;
+        int height = this->height+1;
+        int num_child = 2;
+        int k = 0;
+        cout << "Current heigth: " << this->height<< "\n";
+        cout << string(height*3,' ') << Current_Node-> get_value()<<string(height,' ') <<"\n";
+        cout << string((height-1)*3+2,' ') << "/"; 
+        cout << string(2,' ') << "\\"<< "\n"; 
+        cout << string((height-1)*3+1,' ') << "/"; 
+        cout << string(2*2,' ') << "\\"<< "\n"; 
+        list<Node*> Q_level;
+        Q_level.push_back(Current_Node);
+        list<Node*> Q_next_level;
+        while(Q_level.size() != 0 && height != 1)
+        {
+            height -= 1;
+            k += 1; 
+            cout << string(height*3-1,' ');
+            for(typename std::list<Node*>::iterator It = Q_level.begin();It != Q_level.end();)
+            {   
+                if((*(It))->left != NULL)
+                {   
+                    cout << string(1,' ')  << ((*It)->left)->get_value() << string(1,' ');
+                    Q_next_level.push_back((*(It))->left);
+                }
+                if((*(It))->right != NULL )
+                {    
+                    cout << string(3,' ')  << ((*It)->right)->get_value();
+                    Q_next_level.push_back((*(It))->right);
+                }
+                ++It;
+                Q_level.pop_front();
+            }
+            cout << "\n";
+            cout << string((height-1)*3+2,' ') << "/"; 
+            cout << string(1,' ') << "\\"<< " "; 
+            for(int i = 1;i<num_child;i++)
+            {
+                cout << string(height/k,' ') << "/"; 
+                cout << string(1,' ') << "\\"<< " ";    
+            }
+            num_child = num_child*2;
+            cout << "\n";
+            Q_level.assign(Q_next_level.begin(),Q_next_level.end());
+            Q_next_level.clear();
+        }
         }
     void inorder()
         {
@@ -102,6 +165,7 @@ public:
         else
             Current_Node->right = new Node(datum);
         Aux_Balanance.clear();
+        this->update_height();
     }
 
     // Auxiliary Variable Tree_Root to set the pointer of the parent after deleting child. Pointer to Pointer operator Node<T>** is used in order to avoid copying data and recursively adjust the pointers 
