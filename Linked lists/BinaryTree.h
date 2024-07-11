@@ -53,10 +53,10 @@ public:
         int k = 0;
         cout << "Current heigth: " << this->height<< "\n";
         cout << string(height*3,' ') << Current_Node-> get_value()<<string(height,' ') <<"\n";
-        cout << string((height-1)*3+2,' ') << "/"; 
-        cout << string(2,' ') << "\\"<< "\n"; 
         cout << string((height-1)*3+1,' ') << "/"; 
-        cout << string(2*2,' ') << "\\"<< "\n"; 
+        cout << string(height,' ') << "\\"<< "\n"; 
+        cout << string((height-1)*3,' ') << "/"; 
+        cout << string((height+2),' ') << "\\"<< "\n"; 
         list<Node*> Q_level;
         Q_level.push_back(Current_Node);
         list<Node*> Q_next_level;
@@ -64,29 +64,44 @@ public:
         {
             height -= 1;
             k += 1; 
-            cout << string(height*3-1,' ');
+            if(k<= (height-1)*3)
+                cout << string((height-1)*3-k,' ');
             for(typename std::list<Node*>::iterator It = Q_level.begin();It != Q_level.end();)
             {   
                 if((*(It))->left != NULL)
                 {   
-                    cout << string(1,' ')  << ((*It)->left)->get_value() << string(1,' ');
+                    cout << string(height*k,' ')  << ((*It)->left)->get_value() << string(1,' ');
                     Q_next_level.push_back((*(It))->left);
                 }
                 if((*(It))->right != NULL )
                 {    
-                    cout << string(3,' ')  << ((*It)->right)->get_value();
+                    cout << string((height-1)*3,' ')  << ((*It)->right)->get_value();
                     Q_next_level.push_back((*(It))->right);
                 }
                 ++It;
                 Q_level.pop_front();
             }
-            cout << "\n";
-            cout << string((height-1)*3+2,' ') << "/"; 
-            cout << string(1,' ') << "\\"<< " "; 
-            for(int i = 1;i<num_child;i++)
+            if(height>2)
+            {   
+                cout << "\n";
+                cout << string((height-1)*3,' ') << "/"; 
+                cout << string(height-1,' ') << "\\"<< " "; 
+                for(int i = 1;i<num_child;i++)
+                {
+                    cout << string(height*2-1,' ') << "/"; 
+                    cout << string(height-1,' ') << "\\";    
+                }
+            }
+            else if (height == 2)
             {
-                cout << string(height/k,' ') << "/"; 
-                cout << string(1,' ') << "\\"<< " ";    
+                cout << "\n";
+                cout << string((height-1)*3+1,' ') << "/"; 
+                cout << string(height-1,' ') << "\\"<< string(1,' '); 
+                for(int i = 1;i<num_child;i++)
+                {
+                    cout << string(height/k,' ') << "/"; 
+                    cout << string(height-1,' ') << "\\"<< " ";    
+                }
             }
             num_child = num_child*2;
             cout << "\n";
