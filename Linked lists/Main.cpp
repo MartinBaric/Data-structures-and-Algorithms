@@ -4,13 +4,14 @@
 #include <list>
 #include <omp.h> // OpenMultiProcessing library for parallel programming
 //#include <random>
-#include "SortingAlgorithmsOnArrays.h"
+#include "SortingAlgorithmsOnArrays.cpp"
 #include "BinaryTree.h"
+#include "LinkedLists.cpp"
 #include "LinkedLists.h"
 
 using namespace std;
 
-const int NUM_THREADS = 4;
+//const int NUM_THREADS = 4;
 
 int main()
 {
@@ -43,16 +44,20 @@ int main()
     //root->deleteNode(10); 
     //root->inorder();
 
-    //list<Swap_Pos> Swap_List;
+    list<Swap_Pos> Swap_List;
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
     //bubbleSort(elementsArray, elementsSize);
     //mergeSort(elementsArray, elementsSize);
+    //insertSort(&elementsList);
+    Bucket_Sort(&elementsList,0,100,10);
     //#pragma omp parallel
     /*{
         bubbleSort(elementsList);
         insertSort(elementsList);
         quickSort(&elementsList_array[0],0,i);
     }*/
+    for(auto it:elementsList)
+        cout << it<< ",";
     //printElements(elementsArray, elementsSize, Swap_List);
 
     free(elementsArray);

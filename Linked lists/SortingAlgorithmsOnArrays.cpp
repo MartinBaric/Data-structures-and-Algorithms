@@ -1,8 +1,7 @@
 #include <list>
-//#include <chrono>
-#include "Timer.h"
-#include "SortingAlgorithmsOnArrays.h"
+#include "Timer.cpp"
 #include "Swap_Position.h"
+//#include "SortingAlgorithmsOnArrays.h"
 
 using namespace std;
 using namespace chrono;
@@ -25,10 +24,77 @@ void bubbleSort(int* elementsArray, int size)
     }
 }
 
-void insertSort(list<int>& unsorted)
+void insertSort(list<int>* unsorted)
 {
     Timer("Insert Sort");
-    // Dimzog's task
+    int Aux;
+    std::list<int>::iterator Next;
+    for(std::list<int>::iterator it = (*unsorted).begin();it!=(*unsorted).end();++it)
+    {
+        Next = it;
+        for(std::list<int>::iterator it_next = Next;it_next!=(*unsorted).end();++it_next)
+        {   
+            // If unsorted move rearenge values
+            if((*it) > (*it_next))
+            {   
+                Aux = (*it);
+                (*it) = (*it_next);
+                (*it_next) = Aux;
+            }
+        }
+    }
+}
+
+// Idea pass a pointer to iterator of the real reference and overwrite
+
+void Bucket_Sort(list<int>* unsorted, int min, int max,int Bucket_num)
+{
+    // Create array that contain pointers to Buckets
+    int Scaling = max/Bucket_num; 
+    int Bucket_ind;
+    // Allocate Memory for an array of Pointers to Bucket lists 
+    list<int>** Bucket_Array = (list<int>**) malloc(Bucket_num*sizeof(list<int>*));
+    // Initialize Buckets
+    for(int i = 0;i<Bucket_num;i++)
+        Bucket_Array[i] = new list<int>;//(list<int>*) malloc(sizeof(list<int>*));
+    // Move Elements into BUckets 
+    
+    for(std::list<int>::iterator it = (*unsorted).begin();it!=(*unsorted).end();++it)
+    {
+        Bucket_ind = int((*it)/Scaling);
+        (*Bucket_Array[Bucket_ind]).push_back((*it));
+    }
+    // Sort Buckets 
+    for(int i = 0;i<Bucket_num;++i)
+        insertSort(Bucket_Array[i]);
+
+    // Insert Buckets into the list by itereating over original list iterator and overwrite  
+
+    std::list<int>::iterator it_copy = (*unsorted).begin();
+    for(int i = 0;i<Bucket_num;++i)
+    {
+        if((*Bucket_Array[i]).empty() != true)
+        {
+            for(std::list<int>::iterator it = (*Bucket_Array[i]).begin();it!=(*Bucket_Array[i]).end();++it)
+            {    
+                //cout << (*it_copy);
+                (*it_copy) = *it;
+                ++it_copy;
+            }   
+        }
+    
+    }
+    // Print Buckets 
+    
+    //for(int i = 0;i<Bucket_num;++i)
+    //{
+    //    cout << " Elements in Bucket: " << i << "\n";
+    //    for(std::list<int>::iterator bucket_element = (*Bucket_Array[i]).begin();bucket_element != (*Bucket_Array[i]).end();++bucket_element)
+    //    {
+     //       cout <<*bucket_element << "," << "\n";
+     //   }
+    //}
+    free(Bucket_Array);
 }
 
 // Merge two sorted arrays (todo lists as a second variant)
