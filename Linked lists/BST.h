@@ -3,9 +3,20 @@
 template <typename T>
 class BST : public Node<T>
 {
+    private:
+    BST* left;
+    BST* right;
+
+
     public:
 
     using Node<T>::Node; 
+    BST(T value)
+    {
+        this->data = value;
+        this->left = this->right = NULL;
+        //this->height = 0;  
+    }
     //using Node<T>::print_tree;
     /* Since the C++ 11 Standard constructors can be inherited;
     it takes all the constructors of the parent class BinaryTree*/ 
@@ -20,7 +31,7 @@ class BST : public Node<T>
             if(this->right != NULL)
                 this->right->insert(datum);
             else{
-                Node<T>* n = new Node(datum);
+                BST<T>* n = new BST(datum);
                 this->right = n;
             }
         }
@@ -29,7 +40,7 @@ class BST : public Node<T>
             if(this->left != NULL)
                 this->left->insert(datum);
             else{
-                Node<T>* n = new Node(datum);
+                BST<T>* n = new BST(datum);
                 this->left = n;
             }
         }
@@ -41,7 +52,7 @@ class BST : public Node<T>
         {
             if (this->right == NULL)
                 {
-                Node<T>* Aux = this->left;
+                BST<T>* Aux = this->left;
                 if(Aux == NULL)
                 {
                     // Return NULL pointer to parent to avoid memory error 
@@ -58,8 +69,8 @@ class BST : public Node<T>
                 }
             else if (this->right != NULL)
                 {
-                Node<T>* Pt_parent = this;
-                Node<T>* Pt_successor = this->right; 
+                BST<T>* Pt_parent = this;
+                BST<T>* Pt_successor = this->right; 
                 // Aux Variable set true if next succassor is in the right node
                 bool If_Root = true; 
                 while(Pt_successor->left!=NULL) 

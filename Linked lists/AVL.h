@@ -1,7 +1,15 @@
 #include "BST.h"
 
 template <typename T>
-class AVL : public BST
+class AVL : public BST<T>
 {
-    //Martin
+    void insert(T datum)
+    {
+        BST::insert(datum);
+        rotationL();
+    }
+    void rotationL()
+    {
+
+    }
 };

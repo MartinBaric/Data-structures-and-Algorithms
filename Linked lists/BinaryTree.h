@@ -10,11 +10,17 @@ template <typename T>
 class Node{
 private:
     Node* left;
-    Node* right;
+    Node* right;    
+
+//Protected : a derived class can access these data.
+protected:
     T data;
     int height;
 
 public:
+    Node(){
+        height = 0;
+    }
     Node(T value)
     {
         this->data = value;
@@ -111,11 +117,11 @@ public:
         }
     void inorder()
         {
-            if(left!=NULL)
-                left->inorder();
+            if(this->left!=NULL)
+                this->left->inorder();
             print_value();
-            if(right!=NULL)
-                right->inorder(); 
+            if(this->right!=NULL)
+                this->right->inorder(); 
         }
      void preorder()
         {
@@ -137,8 +143,8 @@ public:
     // Initialize Tree via Breadth First Search manner level by level
     void insert(T datum)
     {
-        /* Intialize two ques which saves the nodes to be explored in the current and next level
-         with a First In First Out (FIFO) Data Strucutre for traversing and removing visited nodes. Therefore insread
+        /* Intialize two queues which save the nodes to be explored in the current and next level
+         with a First In First Out (FIFO) Data Strucutre for traversing and removing visited nodes. Therefore instead
          of using vector datastrucure which is Last In First Out (LIFO) we use a list
           with implemented push_back() -> First in (first element),pop_front() fisrt out (1 Element) */ 
         // Auxiliary Pointer to the current position within the list
