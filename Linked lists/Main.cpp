@@ -6,6 +6,7 @@
 //#include <random>
 #include "SortingAlgorithmsOnArrays.cpp"
 #include "BinaryTree.h"
+#include "BST.h"
 #include "LinkedLists.cpp"
 #include "LinkedLists.h"
 
@@ -22,7 +23,8 @@ int main()
     int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     initializeArray(elementsList, elementsArray);
 
-    Node<int> *root = new Node<int>(11);
+    BST<int> *root = new BST<int>(11);
+    //Node<int> *root = new Node<int>(11);
     //Node<int>* root = initializeTree(elementsList);
     root->insert(10);
     root->insert(15);
@@ -36,7 +38,7 @@ int main()
     //root->deleteNode(15);
     //root->deleteNode(1);
     //root->inorder();
-    root->print_tree();
+    root->inorder();
     //root->insert(13);
     //root->inorder();
     //root->insert(11);
@@ -44,20 +46,22 @@ int main()
     //root->deleteNode(10); 
     //root->inorder();
 
-    list<Swap_Pos> Swap_List;
+    //list<Swap_Pos> Swap_List;
+
     //quickSort(&elementsArray[0], 0, elementsSize, Swap_List, true);
     //bubbleSort(elementsArray, elementsSize);
     //mergeSort(elementsArray, elementsSize);
     //insertSort(&elementsList);
-    Bucket_Sort(&elementsList,0,100,10);
+    //Bucket_Sort(&elementsList,0,100,10);
+
     //#pragma omp parallel
     /*{
         bubbleSort(elementsList);
         insertSort(elementsList);
         quickSort(&elementsList_array[0],0,i);
     }*/
-    for(auto it:elementsList)
-        cout << it<< ",";
+    /*for(auto it:elementsList)
+        cout << it<< ",";*/
     //printElements(elementsArray, elementsSize, Swap_List);
 
     free(elementsArray);
