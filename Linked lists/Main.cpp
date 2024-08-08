@@ -23,8 +23,8 @@ int main()
     int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     initializeArray(elementsList, elementsArray);
 
-    BST<int> *root = new BST<int>(11);
-    //Node<int> *root = new Node<int>(11);
+    //BST<int> *root = new BST<int>(11);
+    Node<int> *root = new Node<int>(11);
     //Node<int>* root = initializeTree(elementsList);
     root->insert(10);
     root->insert(15);

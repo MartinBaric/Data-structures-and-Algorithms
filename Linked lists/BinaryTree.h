@@ -31,15 +31,36 @@ public:
     {
         cout << "Data " << this->data << " removed from the tree\n";
     }
-    T get_value()
+    T getData()
     {
         return this->data;
     }
 
-    void print_value()
-        {
-            cout <<  get_value() <<  ",";
-        }
+    virtual Node<T>* getRight()
+    {
+        return this->right;
+    }
+
+    virtual Node<T>* getLeft()
+    {
+        return this->left;
+    }
+
+    void setRight(Node<T> n)
+    {
+        this->right = n;
+    }
+
+    void setLeft(Node<T> n)
+    {
+        this->left = n;
+    }
+
+    void printData()
+    {
+        cout <<  getData() <<  ",";
+    }
+
     void update_height()
     {
         this->height = 0;
@@ -58,7 +79,7 @@ public:
         int num_child = 2;
         int k = 0;
         cout << "Current heigth: " << this->height<< "\n";
-        cout << string(height*3,' ') << Current_Node-> get_value()<<string(height,' ') <<"\n";
+        cout << string(height*3,' ') << Current_Node-> getData()<<string(height,' ') <<"\n";
         cout << string((height-1)*3+1,' ') << "/"; 
         cout << string(height,' ') << "\\"<< "\n"; 
         cout << string((height-1)*3,' ') << "/"; 
@@ -76,12 +97,12 @@ public:
             {   
                 if((*(It))->left != NULL)
                 {   
-                    cout << string(height*k,' ')  << ((*It)->left)->get_value() << string(1,' ');
+                    cout << string(height*k,' ')  << ((*It)->left)->getData() << string(1,' ');
                     Q_next_level.push_back((*(It))->left);
                 }
                 if((*(It))->right != NULL )
                 {    
-                    cout << string((height-1)*3,' ')  << ((*It)->right)->get_value();
+                    cout << string((height-1)*3,' ')  << ((*It)->right)->getData();
                     Q_next_level.push_back((*(It))->right);
                 }
                 ++It;
@@ -115,17 +136,17 @@ public:
             Q_next_level.clear();
         }
         }
-    void inorder()
+    virtual void inorder()
         {
-            if(this->left!=NULL)
-                this->left->inorder();
-            print_value();
-            if(this->right!=NULL)
-                this->right->inorder(); 
+            if(getLeft()!=NULL)
+                getLeft()->inorder();
+            printData();
+            if(getRight()!=NULL)
+                getRight()->inorder(); 
         }
      void preorder()
         {
-            print_value();
+            printData();
             if(left!=NULL)
                 left->preorder();
             if(right!=NULL)
@@ -137,7 +158,7 @@ public:
                 left->postorder();
             if(right!=NULL)
                 right->postorder();
-            print_value(); 
+            printData(); 
         }
 
     // Initialize Tree via Breadth First Search manner level by level

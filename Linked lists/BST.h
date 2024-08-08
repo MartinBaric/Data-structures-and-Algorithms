@@ -24,6 +24,35 @@ class BST : public Node<T>
     // This means. We define the constructor of BST using the definition of the constructor of Node
     //BST(T value)::Node<T>(value);
 
+    BST<T>* getRight() override
+    {
+        return this->right;
+    }
+
+    BST<T>* getLeft() override
+    {
+        return this->left;
+    }
+
+    void setRight(BST<T> n)
+    {
+        this->right = n;
+    }
+
+    void setLeft(BST<T> n)
+    {
+        this->left = n;
+    }
+
+    void inorder() override
+    {
+        if(this->getLeft()!=NULL)
+            this->getLeft()->inorder();
+        this->printData();
+        if(this->getRight()!=NULL)
+            this->getRight()->inorder(); 
+    }
+
     void insert(T datum)
     {
         if (this->data < datum)
