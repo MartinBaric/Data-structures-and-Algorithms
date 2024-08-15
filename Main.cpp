@@ -4,15 +4,14 @@
 #include <list>
 #include <omp.h> // OpenMultiProcessing library for parallel programming
 //#include <random>
-#include "Arrays/SortingAlgorithmsOnArrays.cpp"
+#include "Arrays/SortingAlgorithmsOnArrays.h"
 #include "Trees/BinaryTree.h"
 #include "Trees/BST.h"
-#include "LinkedLists.cpp"
-#include "LinkedLists.h"
+#include "Linked_Lists/LinkedLists.h"
 
 using namespace std;
 
-//const int NUM_THREADS = 4;
+const int NUM_THREADS = 4;
 
 int main()
 {

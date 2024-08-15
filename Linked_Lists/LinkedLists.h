@@ -5,7 +5,7 @@
 #include <string>
 #include <list>
 //#include <random>
-#include "BinaryTree.h"
+#include "../Trees/BinaryTree.h"
 //#include "SortingAlgorithmsOnArrays.h"
 
 using namespace std;

@@ -1,8 +1,8 @@
 #pragma once
 
 #include <list>
-#include "Timer.h"
-#include "Swap_Position.h"
+#include "../Timer/Timer.h"
+#include "../Linked_Lists/Swap_Position.h"
 
 void bubbleSort(int*,int);
 /*void bubbleSort(int*,int);

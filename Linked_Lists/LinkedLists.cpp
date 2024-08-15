@@ -9,8 +9,6 @@
 
 using namespace std;
 
-const int NUM_THREADS = 4;
-
 void printElements(int* elementsArray, int elementsSize, list<Swap_Pos>& Swap_List)
 {
     for(int k = 0; k < elementsSize; k++) {

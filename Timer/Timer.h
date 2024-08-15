@@ -3,7 +3,7 @@
 #include <string>
 #include <chrono>
 
-// struct not compatible for usage with template<T>, only for class definitions 
+// struct not compatible for usage with template<T>; templates can only be used with classes 
 
 struct Timer
 {
