@@ -6,8 +6,10 @@
 //#include <random>
 #include "Arrays/SortingAlgorithmsOnArrays.h"
 #include "Trees/BinaryTree.h"
-#include "Trees/BST.h"
-#include "Linked_Lists/LinkedLists.h"
+//#include "Trees/BST.h"
+#include "Trees/AVL.h"
+//#include "Linked lists/LinkedLists.cpp"
+//#include "Linked lists/LinkedLists.h"
 
 using namespace std;
 
@@ -16,23 +18,23 @@ const int NUM_THREADS = 4;
 int main()
 {
     //omp_set_num_threads(NUM_THREADS);
-    list<int> elementsList = initializeList<int>();
+    //list<int> elementsList = initializeList<int>();
     // Convert to Array for Quicksort Efficiency
-    int elementsSize = elementsList.size();
-    int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
-    initializeArray(elementsList, elementsArray);
+    //int elementsSize = elementsList.size();
+    //int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
+    //initializeArray(elementsList, elementsArray);
 
     //BST<int> *root = new BST<int>(11);
-    Node<int> *root = new Node<int>(11);
+    AVL<int> *root = new AVL<int>(11);
     //Node<int>* root = initializeTree(elementsList);
     root->insert(10);
-    root->insert(15);
-    root->insert(1);
-    root->insert(6);
-    root->insert(12);
-    root->insert(7);
+    //root->insert(15);
+    //root->insert(1);
+    //root->insert(6);
+    //root->insert(12);
+    //root->insert(7);
     //root->inorder();
-    root->insert(5);
+    //root->insert(5);
     //root->deleteNode(10);
     //root->deleteNode(15);
     //root->deleteNode(1);
@@ -63,6 +65,6 @@ int main()
         cout << it<< ",";*/
     //printElements(elementsArray, elementsSize, Swap_List);
 
-    free(elementsArray);
+    //free(elementsArray);
     return 0;
 }

@@ -44,6 +44,15 @@ class BST : public Node<T>
         this->left = n;
     }
 
+    void create_new(T datum,bool right)
+    {
+        BST<T>* n = new BST(datum);
+        if(right == true)
+            this->right = n;
+        else
+            this->left = n;
+    }
+
     void inorder() override
     {
         if(this->getLeft()!=NULL)
@@ -57,20 +66,18 @@ class BST : public Node<T>
     {
         if (this->data < datum)
         {
-            if(this->right != NULL)
-                this->right->insert(datum);
+            if(this->getRight() != NULL)
+                this->getRight()->insert(datum);
             else{
-                BST<T>* n = new BST(datum);
-                this->right = n;
+                create_new(datum,true);
             }
         }
         else if (this->data > datum)
         {
-            if(this->left != NULL)
-                this->left->insert(datum);
+            if(this->getLeft() != NULL)
+                this->getLeft()->insert(datum);
             else{
-                BST<T>* n = new BST(datum);
-                this->left = n;
+                create_new(datum,false);
             }
         }
     }

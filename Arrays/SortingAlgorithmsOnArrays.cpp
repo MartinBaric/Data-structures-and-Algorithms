@@ -1,6 +1,6 @@
 #include <list>
-#include "Timer.cpp"
-#include "Swap_Position.h"
+#include "../Timer/Timer.cpp"
+#include "../Linked lists/Swap_Position.h"
 //#include "SortingAlgorithmsOnArrays.h"
 
 using namespace std;
