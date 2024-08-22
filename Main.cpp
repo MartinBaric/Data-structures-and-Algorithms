@@ -28,6 +28,10 @@ int main()
     AVL<int> *root = new AVL<int>(11);
     //Node<int>* root = initializeTree(elementsList);
     root->insert(10);
+    root->insert(15);
+    root->insert(14);
+    root->insert(16);
+    root->insert(17);
     //root->insert(15);
     //root->insert(1);
     //root->insert(6);
