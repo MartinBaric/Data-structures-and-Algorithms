@@ -25,14 +25,14 @@ int main()
     //initializeArray(elementsList, elementsArray);
 
     //BST<int> *root = new BST<int>(11);
-    AVL<int> *root = new AVL<int>(11);
+    AVL<int> *root = new AVL<int>(13);
     //Node<int>* root = initializeTree(elementsList);
-    root->insert(10);
     root->insert(15);
-    root->insert(14);
-    root->insert(16);
-    root->insert(17);
-    //root->insert(15);
+    root->insert(11);
+    root->insert(12);
+    root->insert(10);
+    root->insert(9);
+    root->insert(8);
     //root->insert(1);
     //root->insert(6);
     //root->insert(12);

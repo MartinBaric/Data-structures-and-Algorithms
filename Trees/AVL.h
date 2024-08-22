@@ -49,18 +49,18 @@ class AVL : public BST<T>
     {
         if(dir == false)
         {
-            AVL<T>* Node_Aux = Root_Node->getLeft()->getLeft();
+            AVL<T>* Node_Aux = Root_Node->left->right;
             T Val_Aux = Root_Node->left->data;
-            Root_Node->left->left = Root_Node->left->right;
             Root_Node->left->right = Root_Node->right;
             Root_Node->right = Root_Node->left;
-            Root_Node->left = Node_Aux;
+            Root_Node->left = Root_Node->left->left;
+            Root_Node->right->left = Node_Aux;
             Root_Node->right->data = Root_Node->data;
-            Root_Node->right->data = Val_Aux;
+            Root_Node->data = Val_Aux;
             // Update Heigth 
             Root_Node->height -= 1;
-            if(Root_Node->left->right != NULL & Root_Node->left->left != NULL)
-                Root_Node->right->height = max(Root_Node->right->left->height,Root_Node->right->right->height)+1;
+            if(Root_Node->right->left != NULL & Root_Node->right->right != NULL)
+                Root_Node->right->height = max(Root_Node->right->left->height+1,Root_Node->right->right->height+1);
             else if (Root_Node->right->left == NULL and Root_Node->right->right != NULL)
                 Root_Node->right->height = Root_Node->right->right->height+1;
             else if (Root_Node->right->right == NULL and Root_Node->right->left != NULL)
@@ -70,18 +70,18 @@ class AVL : public BST<T>
         }
         else if (dir == true)
         {
-            AVL<T>* Node_Aux = Root_Node->right->right;
+            AVL<T>* Node_Aux = Root_Node->right->left;
             T Val_Aux = Root_Node->right->data;
-            Root_Node->right->right = Root_Node->right->left;
-            Root_Node->right->left = Root_Node->left->left;
+            Root_Node->right->left = Root_Node->left;
             Root_Node->left = Root_Node->right;
+            Root_Node->right = Root_Node->right->right;
+            Root_Node->left->right = Node_Aux;
             Root_Node->left->data = Root_Node->data;
             Root_Node->data = Val_Aux;
-            Root_Node->right = Node_Aux;
             // Update Heigth 
             Root_Node->height -= 1;
             if(Root_Node->left->right != NULL & Root_Node->left->left != NULL)
-                Root_Node->left->height = max(Root_Node->left->left->height,Root_Node->left->right->height)+1;
+                Root_Node->left->height = max(Root_Node->left->left->height+1,Root_Node->left->right->height+1);
             else if (Root_Node->left->left == NULL and Root_Node->left->right != NULL)
                 Root_Node->left->height = Root_Node->right->right->height+1;
             else if (Root_Node->left->right == NULL and Root_Node->left->left != NULL)
@@ -168,11 +168,11 @@ class AVL : public BST<T>
          bigger then the right subtree perform right or left right rotation
         */
         if(this->right == NULL)
-            height_right = 0;
+            height_right = -1;
         else
             height_right = this->right->height;
         if(this->left == NULL)
-            height_left = 0;
+            height_left = -1;
         else
             {
             height_left = this->left->height;
@@ -182,11 +182,10 @@ class AVL : public BST<T>
             // Right Rotate 
             Rotate(this);
         }
-            // Else perform left or right left rotation 
+        // Else perform left or right left rotation 
         else if (height_right-height_left> 1)
         {
-            ;
-            // Left Rotate 
+         //   // Left Rotate 
             Rotate(this,true);
         }
     }
