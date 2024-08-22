@@ -1,20 +1,30 @@
 #include "BST.h"
 
 template <typename T>
-class AVL : public BST<T>
+class RBtree : public BST<T>
 {
     private:
-    AVL* left;
-    AVL* right;
+    RBtree* left;
+    ARBtreeVL* right;
+    bool color; //true = black, red = false;
     
     public:
     
-    using BST<T>::BST; 
-    AVL(T value)
+    RBtree(T value, bool col)
     {
         this->data = value;
         this->left = this->right = NULL;
-        this->height = 0;  
+        this->height = 0;
+        this->color = col;
+    }
+
+    using BST<T>::BST; 
+    RBtree(T value)
+    {
+        this->data = value;
+        this->left = this->right = NULL;
+        this->height = 0;
+        this->color = true; 
     }
 
     //void insert(T datum)
@@ -27,22 +37,22 @@ class AVL : public BST<T>
     {
         ;
     }
-    AVL<T>* getRight() override
+    RBtree<T>* getRight() override
     {
         return this->right;
     }
 
-    AVL<T>* getLeft() override
+    RBtree<T>* getLeft() override
     {
         return this->left;
     }
 
-    void setRight(AVL<T> n)
+    void setRight(RBtree<T> n)
     {
         this->right = n;
     }
 
-    void setLeft(AVL<T> n)
+    void setLeft(RBtree<T> n)
     {
         this->left = n;
     }

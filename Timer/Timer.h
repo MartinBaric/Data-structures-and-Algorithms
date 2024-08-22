@@ -1,9 +1,18 @@
+/*
+The implementation of a struct called timer primarily focused to measure 
+the execution time of the different algorithms for comparison. Alternatively, it can be used
+to measure the execution time of specific code lines in order to optimize them. 
+
+Author: Martin Barič,
+Date: 10.08.2024
+*/
+
 #pragma once
 
 #include <string>
 #include <chrono>
 
-// struct not compatible for usage with template<T>; templates can only be used with classes 
+// Note: struct not compatible for usage with template<T>; templates can only be used with classes 
 
 struct Timer
 {

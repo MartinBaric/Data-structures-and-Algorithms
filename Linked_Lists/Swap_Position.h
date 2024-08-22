@@ -1,3 +1,9 @@
+/*
+
+Author: Dimitrij Sitenko,
+Date: 07.08.2024
+*/
+
 #pragma once
 
 struct Swap_Pos{

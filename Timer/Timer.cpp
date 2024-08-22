@@ -1,6 +1,9 @@
-/*The implementation of a struct called timer to measure the execution time
-of the different algorithms. Alternatively, it can be used to measure 
-the execution time of specific code lines in order to optimize it. */
+/*
+The necessary attributes of the timer are self-explainatory.
+
+Author: Martin Barič,
+Date: 10.08.2024
+*/
 
 #include <iostream>
 #include <string>

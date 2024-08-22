@@ -1,11 +1,6 @@
+#include "LinkedLists.h"
+
 #include <iostream>
-#include <fstream> // For reading/writing files
-#include <string>
-#include <list>
-#include <omp.h> // OpenMultiProcessing library for parallel programming
-//#include <random>
-#include "Swap_Position.h"
-#include "BinaryTree.h"
 
 using namespace std;
 
