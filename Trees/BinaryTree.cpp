@@ -7,6 +7,8 @@ The operation Insert inserts new data into the binary tree
 Author: Martin Barič,
 Date: 21.08.2024
 */
+
+#include <list>
 #include "BinaryTree.h"
 
 template <class T>
@@ -48,13 +50,13 @@ Node<T>* Node<T>::getLeft()
 }
 
 template <class T>
-void Node<T>::setRight(Node<T> n)
+void Node<T>::setRight(Node<T>* n)
 {
     this->right = n;
 }
 
 template <class T>
-void Node<T>::setLeft(Node<T> n)
+void Node<T>::setLeft(Node<T>* n)
 {
     this->left = n;
 }
@@ -223,7 +225,7 @@ void Node<T>::insert(T datum)
 }
 
 template <class T>
-void Node<T>::deleteNode (T datum, Node<T>** Tree_Root = NULL)
+void Node<T>::deleteNode(T datum, Node<T>** Tree_Root)
 {   
     if (this->data == datum)
     {
@@ -295,4 +297,6 @@ void Node<T>::deleteNode (T datum, Node<T>** Tree_Root = NULL)
             this->right->deleteNode(datum, Tree_Root = &(this->right));
     }
 }
+
+template class Node<int>;
 
