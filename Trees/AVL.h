@@ -1,4 +1,5 @@
-#include "BST.cpp"
+#pragma once
+#include "BST.h"
 #include <algorithm>
 
 template <typename T>
@@ -15,7 +16,7 @@ class AVL : public BST<T>
 
     public:
     
-    using BST<T>::BST; 
+    using BST<T>::BST;
     AVL(T value)
     {
         this->data = value;
@@ -23,17 +24,10 @@ class AVL : public BST<T>
         this->height = 0;  
     }
 
-    //void insert(T datum)
-    //{
-     //   BST<T>::insert(datum);
-        //Rotate_Subtree(); 
-    // Right Rotate: false 
-    // Left Rotate: true  
-    //}
     void printData() 
         {
             cout <<  this->data <<  ",";
-            cout << "Heght: "   << this->height << "\n";
+            cout << "Height: "   << this->height << "\n";
         }
 
     void inorder()
@@ -49,6 +43,17 @@ class AVL : public BST<T>
     {
         if(dir == false)
         {
+            /*
+            if(Root_Node->left->height - Root_Node->right->height == 1)
+            {
+                AVL<T>* Node_Aux = Root_Node->left->left;
+                Root_Node->right = Root_Node->left:
+                Root->right->right = Node_Aux;
+                Root_Node->data = 
+            }
+            else:
+            {
+            */
             AVL<T>* Node_Aux = Root_Node->left->right;
             T Val_Aux = Root_Node->left->data;
             Root_Node->left->right = Root_Node->right;
@@ -57,8 +62,8 @@ class AVL : public BST<T>
             Root_Node->right->left = Node_Aux;
             Root_Node->right->data = Root_Node->data;
             Root_Node->data = Val_Aux;
-            // Update Heigth 
-            Root_Node->height -= 1;
+            // Update Heigth
+            Root_Node->height -= 1; 
             if(Root_Node->right->left != NULL & Root_Node->right->right != NULL)
                 Root_Node->right->height = max(Root_Node->right->left->height+1,Root_Node->right->right->height+1);
             else if (Root_Node->right->left == NULL and Root_Node->right->right != NULL)
@@ -69,9 +74,9 @@ class AVL : public BST<T>
                 Root_Node->right->height = 0; 
         }
         else if (dir == true)
-        {
-            AVL<T>* Node_Aux = Root_Node->right->left;
+        {    
             T Val_Aux = Root_Node->right->data;
+            AVL<T>* Node_Aux = Root_Node->right->left;     
             Root_Node->right->left = Root_Node->left;
             Root_Node->left = Root_Node->right;
             Root_Node->right = Root_Node->right->right;
@@ -82,10 +87,10 @@ class AVL : public BST<T>
             Root_Node->height -= 1;
             if(Root_Node->left->right != NULL & Root_Node->left->left != NULL)
                 Root_Node->left->height = max(Root_Node->left->left->height+1,Root_Node->left->right->height+1);
-            else if (Root_Node->left->left == NULL and Root_Node->left->right != NULL)
+            else if (Root_Node->left->left == NULL & Root_Node->left->right != NULL)
                 Root_Node->left->height = Root_Node->right->right->height+1;
-            else if (Root_Node->left->right == NULL and Root_Node->left->left != NULL)
-                Root_Node->left->height = Root_Node->right->left->height+1;
+            else if (Root_Node->left->right == NULL & Root_Node->left->left != NULL)
+                Root_Node->left->height = Root_Node->left->left->height+1;
             else 
                 Root_Node->left->height = 0; 
         }
@@ -167,6 +172,7 @@ class AVL : public BST<T>
          If the height of the left subtree is 2 levels
          bigger then the right subtree perform right or left right rotation
         */
+       
         if(this->right == NULL)
             height_right = -1;
         else
@@ -179,14 +185,39 @@ class AVL : public BST<T>
             }
         if (height_left-height_right >1)
         {
-            // Right Rotate 
-            Rotate(this);
+            if(this->left->left == NULL)
+            {
+                Rotate(this->left,true); //Left Rotate 
+                Rotate(this); 
+            }
+            else if(this->left->right == NULL)
+                Rotate(this); //Right Rotate 
+            else if(this->left->right->height-this->left->left->height==1)
+            {
+                Rotate(this->left,true); //Left Rotate 
+                Rotate(this); // Right Rotate
+            }
+            else
+                Rotate(this); // Right Rotate
+
         }
         // Else perform left or right left rotation 
         else if (height_right-height_left> 1)
         {
-         //   // Left Rotate 
-            Rotate(this,true);
+            if(this->right->right == NULL)
+            {
+                Rotate(this->right); //Right Rotate 
+                Rotate(this,true);
+            }
+            else if(this->right->left == NULL)
+                Rotate(this,true); //Left Rotate 
+            else if(this->right->left->height-this->right->right->height==1)
+            {
+                Rotate(this->right); //Right Rotate 
+                Rotate(this,true); //Left Rotate 
+            }
+            else
+                Rotate(this,true); //Left Rotate        
         }
     }
 };
