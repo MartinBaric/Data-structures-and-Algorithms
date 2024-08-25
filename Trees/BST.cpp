@@ -100,22 +100,20 @@ void BST<T>::deleteNode(T datum)
         {
             BST<T>* Pt_parent = this;
             BST<T>* Pt_successor = this->right; 
-            // Aux Variable set true if next succassor is in the right node
-            bool If_Root = true; 
             while(Pt_successor->left!=NULL) 
-                {   
-                    If_Root = false; //set to false if next successor is the left branch of the right node
-                    Pt_parent = Pt_successor;
-                    Pt_successor = Pt_successor->left;
-                }
+            {   
+                Pt_parent = Pt_successor;
+                Pt_successor = Pt_successor->left;
+            }
             // Overwrite data to be deleted with next leftmost successor
             this->data = Pt_successor->data;
-            // Reset Pointer to avoid memory issues
-            if(If_Root == false)
+            // Link Pointer at the most bottom leaf to avoid memory issues
+            if(Pt_successor->right != NULL)
                 Pt_parent->left = Pt_successor->right;
             else
                 Pt_parent->right = NULL;
             // Delete Leaf
+            Pt_successor->data = datum;
             delete Pt_successor;
         }
 

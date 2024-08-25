@@ -43,7 +43,7 @@ int main()
     //root->insert(7);
     //root->inorder();
     //root->insert(5);
-    //root->deleteNode(10);
+    root->deleteNode(4);
     //root->deleteNode(15);
     //root->deleteNode(1);
     //root->inorder();
