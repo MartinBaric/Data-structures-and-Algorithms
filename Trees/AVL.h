@@ -13,7 +13,7 @@ class AVL : public BST<T>
     protected:
 
     // long long int to be compatible with the max function below
-    long long int height = 0;
+    int height = 0;
 
     public:
     using BST<T>::BST;

@@ -3,6 +3,7 @@
 /* Note: This means. We define the constructor of BST using the definition 
 of the constructor of Node BST(T value)::Node<T>(value);*/
 
+
 template <class T>
 BST<T>::BST(T value)
 {
@@ -82,24 +83,21 @@ void BST<T>::deleteNode(T datum)
     if (this->data == datum)
     {
         if (this->right == NULL)
+        {
+            if(this->left == NULL)
             {
-            BST<T>* Aux = this->left;
-            if(Aux == NULL)
-            {
-                // Return NULL pointer to parent to avoid memory error 
-                // TODO Check other cases (May be not elegant solution)
+                // Return NULL pointer to parent to avoid memory issues
                 delete this;
-                //this->data = NULL;
             }
-            else{
-                this->data = Aux->data;
-                this->left = Aux->left;
-                this->right = Aux->right;
-            }
-            delete Aux;
-            }
-        else if (this->right != NULL)
+            else
             {
+                this->data = this->left->data;
+                this->right = this->left->right;
+                this->left = this->left->left;
+            }
+        }
+        else
+        {
             BST<T>* Pt_parent = this;
             BST<T>* Pt_successor = this->right; 
             // Aux Variable set true if next succassor is in the right node
@@ -119,7 +117,7 @@ void BST<T>::deleteNode(T datum)
                 Pt_parent->right = NULL;
             // Delete Leaf
             delete Pt_successor;
-            }
+        }
 
     }
     else if (this->data > datum)

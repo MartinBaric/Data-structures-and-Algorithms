@@ -24,6 +24,10 @@ void bubbleSort(int* elementsArray, int size)
     }
 }
 
+
+
+
+
 void insertSort(list<int>* unsorted)
 {
     Timer("Insert Sort");

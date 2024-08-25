@@ -10,7 +10,7 @@ class AVL : public BST<T>
     protected:
 
     // long long int to be compatible with the max function below
-    long long int height = 0;
+    int height = 0;
 
     public:
     
@@ -41,17 +41,6 @@ class AVL : public BST<T>
     {
         if(dir == false)
         {
-            /*
-            if(Root_Node->left->height - Root_Node->right->height == 1)
-            {
-                AVL<T>* Node_Aux = Root_Node->left->left;
-                Root_Node->right = Root_Node->left:
-                Root->right->right = Node_Aux;
-                Root_Node->data = 
-            }
-            else:
-            {
-            */
             AVL<T>* Node_Aux = Root_Node->left->right;
             T Val_Aux = Root_Node->left->data;
             Root_Node->left->right = Root_Node->right;
@@ -130,17 +119,16 @@ class AVL : public BST<T>
 
     void insert(T datum) override
     {
-        long long int height_left,height_right;
+        int height_left,height_right;
         if (this->data < datum)
         {
             if(this->getRight() != NULL)
             {
                 this->getRight()->insert(datum);
                 if(this->getLeft() != NULL)
-                    this->height = max(this->getLeft()->height+1,this->getRight()->height+1);
+                    this->height = int(max(this->getLeft()->height+1,this->getRight()->height+1));
                 else
                     this->height = this->getRight()->height+1;
-
             }
             else{
                 create_new(datum,true);
