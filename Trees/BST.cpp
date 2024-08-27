@@ -47,6 +47,32 @@ void BST<T>::create_new(T datum,bool right)
 }
 
 template <class T>
+void BST<T>::Rotate_R(BST<T>* Root_Node)
+{
+    BST<T>* Node_Aux = Root_Node->left->right;
+    T Val_Aux = Root_Node->left->data;
+    Root_Node->left->right = Root_Node->right;
+    Root_Node->right = Root_Node->left;
+    Root_Node->left = Root_Node->left->left;
+    Root_Node->right->left = Node_Aux;
+    Root_Node->right->data = Root_Node->data;
+    Root_Node->data = Val_Aux;
+};
+
+template <class T>
+void BST<T>::Rotate_L(BST<T>* Root_Node)
+{
+    T Val_Aux = Root_Node->right->data;
+    BST<T>* Node_Aux = Root_Node->right->left;     
+    Root_Node->right->left = Root_Node->left;
+    Root_Node->left = Root_Node->right;
+    Root_Node->right = Root_Node->right->right;
+    Root_Node->left->right = Node_Aux;
+    Root_Node->left->data = Root_Node->data;
+    Root_Node->data = Val_Aux;
+}
+
+template <class T>
 void BST<T>::inorder()
 {
     if(this->getLeft()!=NULL)

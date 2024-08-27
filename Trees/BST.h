@@ -25,7 +25,8 @@ class BST: public Node<T>
     void setLeft(BST<T> n);
 
     virtual void create_new(T datum,bool right);
-
+    void Rotate_L(BST<T>* Root_Node);
+    void Rotate_R(BST<T>* Root_Node);
     void inorder() override;
     void insert(T datum) override;
     virtual void deleteNode(T datum);
