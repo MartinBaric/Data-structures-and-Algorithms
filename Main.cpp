@@ -5,11 +5,13 @@
 #include <omp.h> // OpenMultiProcessing library for parallel programming
 //#include <random>
 #include "Arrays/SortingAlgorithmsOnArrays.h"
-#include "Trees/BinaryTree.h"
-//#include "Trees/BinaryTree.cpp"
-#include "Trees/BST.h"
+#include "Trees/BinaryTree.cpp"
 #include "Trees/BST.cpp"
-//#include "Trees/AVL.h"
+#include "Trees/AVL.cpp"
+#include "Trees/BST.h"
+#include "Trees/AVL.h"
+#include "Trees/BinaryTree.h"
+
 //#include "Linked lists/LinkedLists.cpp"
 //#include "Linked lists/LinkedLists.h"
 
@@ -26,15 +28,14 @@ int main()
     //int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     //initializeArray(elementsList, elementsArray);
     //Node<int> *root = new Node<int>(11);
-    BST<int> *root = new BST<int>(11);
-    //AVL<int> *root = new AVL<int>(9);
+    //BST<int> *root = new BST<int>(11);
+    AVL<int> *root = new AVL<int>(9);
     //Node<int>* root = initializeTree(elementsList);
-    //root->insert(8);
-    root->insert(7);
     root->insert(8);
-    root->insert(4);
-    //root->insert(7);
-    root->insert(6);
+    root->insert(7);
+    //root->insert(11);
+    //root->insert(12);
+    //root->insert(15);
     //root->insert(12);
     //root->insert(10);
     //root->insert(9);
@@ -43,7 +44,7 @@ int main()
     //root->insert(7);
     //root->inorder();
     //root->insert(5);
-    root->deleteNode(4);
+    //root->deleteNode(4);
     //root->deleteNode(15);
     //root->deleteNode(1);
     //root->inorder();

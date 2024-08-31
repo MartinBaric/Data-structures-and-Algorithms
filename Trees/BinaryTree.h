@@ -32,11 +32,10 @@ public:
     T getData();
     virtual Node<T>* getRight();
     virtual Node<T>* getLeft();
-    void setRight(Node<T>* n);
+    virtual void setRight(Node<T>* n);
+    virtual void setLeft(Node<T>* n);
 
-    void setLeft(Node<T>* n);
-
-    void printData();
+    virtual void printData();
     void update_height();
         
     virtual void inorder();

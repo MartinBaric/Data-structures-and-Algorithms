@@ -1,4 +1,5 @@
 #include "BST.h"
+#include <memory>
 
 /* Note: This means. We define the constructor of BST using the definition 
 of the constructor of Node BST(T value)::Node<T>(value);*/
@@ -9,7 +10,7 @@ BST<T>::BST(T value)
 {
     this->data = value;
     this->left = this->right = NULL;
-    //this->height = 0;  
+    this->height = 0;  
 }
 
 template <class T>
@@ -25,15 +26,15 @@ BST<T>* BST<T>::getLeft()
 }
 
 template <class T>
-void BST<T>::setRight(BST<T> n)
+void BST<T>:: setRight(BST<T>** n)
 {
-    this->right = n;
+    this->right = *n;
 }
 
 template <class T>
-void BST<T>::setLeft(BST<T> n)
+void BST<T>::setLeft(BST<T>** n)
 {
-    this->left = n;
+    this->left = *n;
 }
 
 template <class T>
@@ -47,29 +48,37 @@ void BST<T>::create_new(T datum,bool right)
 }
 
 template <class T>
-void BST<T>::Rotate_R(BST<T>* Root_Node)
+template <typename S>
+void BST<T>::Rotate_R(S** Root_Node)
 {
-    BST<T>* Node_Aux = Root_Node->left->right;
-    T Val_Aux = Root_Node->left->data;
-    Root_Node->left->right = Root_Node->right;
-    Root_Node->right = Root_Node->left;
-    Root_Node->left = Root_Node->left->left;
-    Root_Node->right->left = Node_Aux;
-    Root_Node->right->data = Root_Node->data;
-    Root_Node->data = Val_Aux;
+    S* Node_Aux = (*Root_Node)->getLeft()->getRight();
+    T Val_Aux = (*Root_Node)->getLeft()->getData();
+    S* Node_Aux_1 = (*Root_Node)->getRight();
+    S* Node_Aux_2 = (*Root_Node)->getLeft();
+    (*Root_Node)->getLeft()->setRight(&Node_Aux_1); 
+    (*Root_Node)->setRight(&Node_Aux_2);
+    Node_Aux_2 = Node_Aux_2->getLeft();
+    (*Root_Node)->setLeft(&Node_Aux_2);
+    (*Root_Node)->getRight()->setLeft(&Node_Aux);
+    (*Root_Node)->getRight()->data = (*Root_Node)->getData();
+    (*Root_Node)->data = Val_Aux;
 };
 
 template <class T>
-void BST<T>::Rotate_L(BST<T>* Root_Node)
+template <typename S>
+void BST<T>::Rotate_L(S** Root_Node)
 {
-    T Val_Aux = Root_Node->right->data;
-    BST<T>* Node_Aux = Root_Node->right->left;     
-    Root_Node->right->left = Root_Node->left;
-    Root_Node->left = Root_Node->right;
-    Root_Node->right = Root_Node->right->right;
-    Root_Node->left->right = Node_Aux;
-    Root_Node->left->data = Root_Node->data;
-    Root_Node->data = Val_Aux;
+    T Val_Aux = (*Root_Node)->getRight()->getData();
+    S* Node_Aux = ((*Root_Node)->getRight())->getLeft();      
+    S* Node_Aux_1 = (*Root_Node)->getLeft();   
+    S* Node_Aux_2 = (*Root_Node)->getRight();
+    (*Root_Node)->getRight()->setLeft(&Node_Aux_1);
+    (*Root_Node)->setLeft(&Node_Aux_2);
+    Node_Aux_2 = Node_Aux_2->getRight();
+    (*Root_Node)->setRight(&Node_Aux_2);
+    (*Root_Node)->getLeft()->setRight(&Node_Aux);    
+    (*Root_Node)->getLeft()->data = (*Root_Node)->getData();
+    (*Root_Node)->data = Val_Aux;
 }
 
 template <class T>
@@ -161,3 +170,5 @@ void BST<T>::deleteNode(T datum)
         }
     }
 }
+
+template class BST<int>;

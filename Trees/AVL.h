@@ -9,23 +9,17 @@ class AVL : public BST<T>
     private:
     AVL* left;
     AVL* right;
-    
-    protected:
-
-    // long long int to be compatible with the max function below
-    int height = 0;
 
     public:
     using BST<T>::BST;
     AVL(T value);
-    void printData(); 
-    void inorder();
+    void printData() override; 
     void Rotate(AVL<T>* Root_Node,bool dir = false);
     AVL<T>* getRight() override;
     AVL<T>* getLeft() override;
-    void setRight(AVL<T> n);
-    void setLeft(AVL<T> n);
-    void create_new(T datum,bool right);
+    void setRight(AVL<T>** Root_Node);
+    void setLeft(AVL<T>** Root_Node);
+    void create_new(T datum,bool right) override;
     /*
     Comment: Dmitrij Sitenko 
     Modify Insert Function from inherited BST class by including left-right rotation after
