@@ -6,11 +6,15 @@ of the constructor of Node BST(T value)::Node<T>(value);*/
 
 
 template <class T>
-BST<T>::BST(T value)
+BST<T>::BST(T value,bool Root)
 {
     this->data = value;
     this->left = this->right = NULL;
     this->height = 0;
+    if(Root == true)
+        this->root = true;
+    else 
+        this->root = false;
 }
 
 /*template <class T>
@@ -101,10 +105,11 @@ void BST<T>::inorder()
 template <class T>
 void BST<T>::insert(T datum)
 {
-    if (this == NULL)
-    {
-        //this->BST<T>(datum);      
-        //this->data = datum;
+    if (this->is_empty() == true)
+    {   
+        this->data = datum;
+        this->empty = false;
+        this->root = true;      
     }
     else {
         if (this->data < datum)
@@ -127,7 +132,7 @@ void BST<T>::insert(T datum)
 }
 
 template <class T>
-void BST<T>::deleteNode(T datum, bool isRoot)
+void BST<T>::deleteNode(T datum)
 {
     if (this->data == datum)
     {
@@ -135,12 +140,14 @@ void BST<T>::deleteNode(T datum, bool isRoot)
         {
             if(this->left == NULL)
             {
-                if(!isRoot)
+                if(this->root == false)
                     delete this;
                     // Return NULL pointer to parent to avoid memory issues
-                if (isRoot)
-                    //this->BST();
+                if (this->root == true)
+                {
+                    this->empty = true;
                     cout << "Tree has been destroyed.\n";
+                }
             }
             else
             {
@@ -174,7 +181,7 @@ void BST<T>::deleteNode(T datum, bool isRoot)
     else if (this->data > datum)
     {
         if(this->left != NULL)
-            this->left->deleteNode(datum, false);
+            this->left->deleteNode(datum);
         else{
             cout << "Das gewünschte Datum existiert nicht.\n";
         }
@@ -182,7 +189,7 @@ void BST<T>::deleteNode(T datum, bool isRoot)
     else if (this->data < datum)
     {
         if(this->right != NULL)
-            this->right->deleteNode(datum, false);
+            this->right->deleteNode(datum);
         else{
             cout << "Das gewünschte Datum existiert nicht.\n";
         }

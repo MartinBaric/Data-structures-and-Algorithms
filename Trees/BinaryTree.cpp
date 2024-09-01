@@ -12,11 +12,16 @@ Date: 21.08.2024
 #include "BinaryTree.h"
 
 template <class T>
-Node<T>::Node(T value)
+Node<T>::Node(T value,bool Root)
 {
     this->data = value;
     left = right = NULL;
     height = 0;    
+    empty = false;
+    if(Root == true)
+        this->root = true;
+    else 
+        this->root = false;
 }
 
 template <class T>
@@ -29,6 +34,13 @@ template <class T>
 Node<T>::Node()
 {
     height = 0;
+    empty = true;
+}
+
+template <class T>
+bool Node<T>::is_empty()
+{
+    return this->empty;
 }
 
 template <class T>
