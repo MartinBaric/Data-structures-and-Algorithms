@@ -4,28 +4,17 @@ template <typename T>
 class RBtree : public BST<T>
 {
     private:
+
     RBtree* left;
-    ARBtreeVL* right;
-    bool color; //true = black, red = false;
+    RBtree* right;
+    bool black; //true = black, red = false;
     
     public:
     
-    RBtree(T value, bool col)
-    {
-        this->data = value;
-        this->left = this->right = NULL;
-        this->height = 0;
-        this->color = col;
-    }
+    RBtree(T value, bool col);
 
     using BST<T>::BST; 
-    RBtree(T value)
-    {
-        this->data = value;
-        this->left = this->right = NULL;
-        this->height = 0;
-        this->color = true; 
-    }
+    RBtree(T value);
 
     //void insert(T datum)
     //{
@@ -33,35 +22,12 @@ class RBtree : public BST<T>
         //rotationL();
     //}
 
-    void rotationL()
-    {
-        ;
-    }
-    RBtree<T>* getRight() override
-    {
-        return this->right;
-    }
+    void rotationL();
+    RBtree<T>* getRight() override;
+    RBtree<T>* getLeft() override;
+    void setRight(RBtree<T>* n);
+    void setLeft(RBtree<T>* n);
 
-    RBtree<T>* getLeft() override
-    {
-        return this->left;
-    }
-
-    void setRight(RBtree<T> n)
-    {
-        this->right = n;
-    }
-
-    void setLeft(RBtree<T> n)
-    {
-        this->left = n;
-    }
-    void create_new(T datum,bool right) override
-    {
-        AVL<T>* n = new AVL(datum);
-        if(right == true)
-            this->right = n;
-        else
-            this->left = n;
-    }
+    void insert(T datum) override;
+    void create_new(T datum,bool right) override;
 };

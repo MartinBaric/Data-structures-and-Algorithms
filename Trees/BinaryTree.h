@@ -17,7 +17,7 @@ template <typename T>
 class Node{
 private:
     Node* left;
-    Node* right;    
+    Node* right;
 
 // Note on Protected : same as 'private' but a derived class can access these data.
 protected:

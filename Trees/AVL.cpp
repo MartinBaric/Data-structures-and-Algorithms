@@ -9,7 +9,7 @@ AVL<T> :: AVL(T value)
 }
 
 template <class T>
-void AVL<T>::printData() 
+void AVL<T>::printData()
 {
     cout <<  this->data <<  ",";
     cout << "Height: "   << this->height << "\n";

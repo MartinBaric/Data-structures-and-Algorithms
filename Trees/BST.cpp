@@ -10,8 +10,15 @@ BST<T>::BST(T value)
 {
     this->data = value;
     this->left = this->right = NULL;
-    this->height = 0;  
+    this->height = 0;
 }
+
+/*template <class T>
+BST<T>::BST()
+{
+    this->left = this->right = NULL;
+    this->height = 0;
+}*/
 
 template <class T>
 BST<T>* BST<T>::getRight()
@@ -94,26 +101,33 @@ void BST<T>::inorder()
 template <class T>
 void BST<T>::insert(T datum)
 {
-    if (this->data < datum)
+    if (this == NULL)
     {
-        if(this->getRight() != NULL)
-            this->getRight()->insert(datum);
-        else{
-            create_new(datum,true);
-        }
+        //this->BST<T>(datum);      
+        //this->data = datum;
     }
-    else if (this->data > datum)
-    {
-        if(this->getLeft() != NULL)
-            this->getLeft()->insert(datum);
-        else{
-            create_new(datum,false);
+    else {
+        if (this->data < datum)
+        {
+            if(this->getRight() != NULL)
+                this->getRight()->insert(datum);
+            else{
+                create_new(datum,true);
+            }
+        }
+        else if (this->data > datum)
+        {
+            if(this->getLeft() != NULL)
+                this->getLeft()->insert(datum);
+            else{
+                create_new(datum,false);
+            }
         }
     }
 }
 
 template <class T>
-void BST<T>::deleteNode(T datum)
+void BST<T>::deleteNode(T datum, bool isRoot)
 {
     if (this->data == datum)
     {
@@ -121,8 +135,12 @@ void BST<T>::deleteNode(T datum)
         {
             if(this->left == NULL)
             {
-                // Return NULL pointer to parent to avoid memory issues
-                delete this;
+                if(!isRoot)
+                    delete this;
+                    // Return NULL pointer to parent to avoid memory issues
+                if (isRoot)
+                    //this->BST();
+                    cout << "Tree has been destroyed.\n";
             }
             else
             {
@@ -156,7 +174,7 @@ void BST<T>::deleteNode(T datum)
     else if (this->data > datum)
     {
         if(this->left != NULL)
-            this->left->deleteNode(datum);
+            this->left->deleteNode(datum, false);
         else{
             cout << "Das gewünschte Datum existiert nicht.\n";
         }
@@ -164,7 +182,7 @@ void BST<T>::deleteNode(T datum)
     else if (this->data < datum)
     {
         if(this->right != NULL)
-            this->right->deleteNode(datum);
+            this->right->deleteNode(datum, false);
         else{
             cout << "Das gewünschte Datum existiert nicht.\n";
         }

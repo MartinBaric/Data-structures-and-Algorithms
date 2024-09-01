@@ -7,9 +7,10 @@
 #include "Arrays/SortingAlgorithmsOnArrays.h"
 //#include "Trees/BinaryTree.cpp"
 //#include "Trees/BST.cpp"
-//#include "Trees/AVL.cpp"
+#include "Trees/AVL.cpp"
 #include "Trees/BST.h"
 #include "Trees/AVL.h"
+#include "Trees/RBtree.h"
 #include "Trees/BinaryTree.h"
 
 //#include "Linked lists/LinkedLists.cpp"
@@ -28,11 +29,19 @@ int main()
     //int* elementsArray = (int*) malloc(elementsSize*sizeof(elementsList.front()));
     //initializeArray(elementsList, elementsArray);
     //Node<int> *root = new Node<int>(11);
-    //BST<int> *root = new BST<int>(11);
-    BST<int> *root = new BST<int>(9);
+    BST<int> *root = new BST<int>();
+    //root = new BST<int>(11);
+    root->insert(11);
+    root->inorder();
+    // = new BST<int>(11);
+    root->deleteNode(11, true);
+    root->inorder();
+    root->insert(12);
+    //AVL<int> *root = new AVL<int>(9);
+    //RBtree<int> *root = new RBtree<int>(11);
     //Node<int>* root = initializeTree(elementsList);
-    root->insert(8);
-    root->insert(7);
+    /*root->insert(8);
+    root->insert(7);*/
     //root->insert(11);
     //root->insert(12);
     //root->insert(15);
