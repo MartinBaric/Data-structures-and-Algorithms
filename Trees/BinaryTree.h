@@ -18,15 +18,16 @@ class Node{
 private:
     Node* left;
     Node* right;
-
 // Note on Protected : same as 'private' but a derived class can access these data.
 protected:
     T data;
+    bool root;
     int height;
+    bool empty;
 
 public:
     Node();
-    Node(T value);
+    Node(T value,bool Root = false);
     ~Node();
 
     T getData();
@@ -34,7 +35,7 @@ public:
     virtual Node<T>* getLeft();
     virtual void setRight(Node<T>* n);
     virtual void setLeft(Node<T>* n);
-
+    bool is_empty();
     virtual void printData();
     void update_height();
         

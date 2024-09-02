@@ -6,7 +6,7 @@ of the constructor of Node BST(T value)::Node<T>(value);*/
 
 
 template <class T>
-BST<T>::BST(T value)
+BST<T>::BST(T value,bool Root)
 {
     this->data = value;
     this->left = this->right = NULL;
@@ -121,8 +121,12 @@ void BST<T>::deleteNode(T datum)
         {
             if(this->left == NULL)
             {
-                // Return NULL pointer to parent to avoid memory issues
-                delete this;
+                if(!isRoot)
+                    delete this;
+                    // Return NULL pointer to parent to avoid memory issues
+                if (isRoot)
+                    //this->BST();
+                    cout << "Tree has been destroyed.\n";
             }
             else
             {
