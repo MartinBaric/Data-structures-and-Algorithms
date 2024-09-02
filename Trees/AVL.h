@@ -27,5 +27,5 @@ class AVL : public BST<T>
      balancing each subtree where insert is called 
     */
     void insert(T datum) override;
-    void deleteNode(T datum) override;
+    void deleteNode(T datum,AVL<T>* Parent = NULL,bool is_root = true,bool Parent_Pos = true);
 };

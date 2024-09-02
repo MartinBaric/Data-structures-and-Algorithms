@@ -121,12 +121,8 @@ void BST<T>::deleteNode(T datum)
         {
             if(this->left == NULL)
             {
-                if(!isRoot)
-                    delete this;
+                delete this;
                     // Return NULL pointer to parent to avoid memory issues
-                if (isRoot)
-                    //this->BST();
-                    cout << "Tree has been destroyed.\n";
             }
             else
             {

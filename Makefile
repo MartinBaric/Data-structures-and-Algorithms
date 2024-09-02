@@ -5,10 +5,14 @@ CC = g++
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
 #  -fopenmp turn on multiprocessing using threads
-CFLAGS = -fopenmp -g -Wall
-OPTS = -c -Wall  
+CFLAGS   = -fopenmp 
+CFLAGS  += -g
+#CFLAGS	+=  -Wall
+OPTS 	= -c -Wall  
 #files to link:
-LFLAGS = -Trees/BinaryTree.o
+LFLAGS  = -Trees/BinaryTree.o
+
+BUILD_DEBUG=yes
 
 # -I Add paths to the compiler containing directories with header files other than default header files within usr/include directory 
 
@@ -36,30 +40,25 @@ $(info Source Folders paths: $(SRC))
 $(info Object Folders paths: $(OBJ))
 $(info Input executable file: $(INPUT))
 $(info Output executable file: $(OUTPUT))
-$(info Compiled .cpp files: $(SRCS))
-$(info Generated object .o files: $(OBJS))
+$(info Compiled source files: $(SRCS))
+$(info Generated object files: $(OBJS))
 
 
-
-all: $(INPUT)
-$(INPUT) : buildrepo $(OBJS)
-	$(CC) -c $(SRCS_Main) $(SRCS) -fopenmp 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp
-	$(CC) -c $< -o $@
-$(INPUT):
+# all: $(OBJS)-before compiling the main file create the object files first  
+all: $(OBJS)
 	$(CC) $(INPUT).cpp $(CFLAGS) -o $(OUTPUT) $(OBJS)
+#	$(CC) -c $(SRCS_Main) $(SRCS) -fopenmp 
+# %.o serves a template which replace % with all contents +++% bofere %   
+#%.o: $(SRCS)/%.cpp
+#	$(CC) -c $< -o $@
+#$(INPUT):
 clean: 
 	rm -f *.o
 	rm -f Test
 	rm -f Trees/*.o
 
-buildrepo:
-	@$(call make-repo)
-
-define make-repo
-	mkdir -p $(OBJ)
-	for dir in $(SRCDIRS); \
-	do \
-		mkdir -p $(OBJ)/$$dir; \
-	done
-endef
+# Usefull commands : 
+# ifndef 
+# if variable not set do
+# endif
+# $(shell ...) allows to use linux shell

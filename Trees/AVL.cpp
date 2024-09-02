@@ -181,9 +181,75 @@ void AVL<T>::insert(T datum)
 }
 
 template <class T>
-void AVL<T>::deleteNode(T datum)
+void AVL<T>::deleteNode(T datum, AVL<T>* Parent, bool is_root, bool Parent_Pos)
 {
-    ;
+    if (this->data == datum)
+    {
+        if (this->right == NULL)
+        {
+            if(this->left == NULL)
+            {
+                if(is_root == true)
+                {    
+                    delete this;
+                    cout << "The tree is completely destroyed";
+                }
+                else
+                    {
+                        // If the left child was called
+                        if(Parent_Pos == true)
+                            Parent->left = NULL;
+                        else 
+                            Parent->right = NULL;
+                    }
+            }
+            else
+            {
+                this->data = this->left->data;
+                this->right = this->left->right;
+                this->left = this->left->left;
+                this->height = int(max(this->left->height,this->right->height));
+            }
+        }
+        else
+        {
+            AVL<T>* Pt_parent = this;
+            AVL<T>* Pt_successor = this->right; 
+            while(Pt_successor->left!=NULL) 
+            {   
+                Pt_parent = Pt_successor;
+                Pt_successor = Pt_successor->left;
+            }
+            this->data = Pt_successor->data;
+            if(Pt_successor->right != NULL)
+            {
+                Pt_parent->left = Pt_successor->right;
+                Pt_parent->height = int(max(Pt_parent->left->height,Pt_parent->right->height));
+            }
+            else
+            {
+                Pt_parent->left = NULL;
+                Pt_parent->height -=1; 
+            }
+            Pt_successor->data = datum;
+            delete Pt_successor;
+        }
+
+    }
+    else if (this->data > datum)
+    {
+        if(this->left != NULL)
+            this->left->deleteNode(datum,this,false,true);    
+        else
+            cout << "Das gewünschte Datum existiert nicht.\n";
+    }
+    else if (this->data < datum)
+    {
+        if(this->right != NULL)
+            this->right->deleteNode(datum,this,false,false);
+        else
+            cout << "Das gewünschte Datum existiert nicht.\n";
+    }
 }
 
 //template class AVL<int>;
