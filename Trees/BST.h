@@ -30,5 +30,5 @@ class BST: public Node<T>
     void Rotate_R(S** Root_Node);
     void inorder() override;
     virtual void insert(T datum) override;
-    void deleteNode(T datum, bool isRoot);
+    virtual void deleteNode(T datum);
 };
