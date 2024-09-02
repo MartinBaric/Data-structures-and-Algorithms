@@ -5,7 +5,7 @@ CC = g++
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
 #  -fopenmp turn on multiprocessing using threads
-CFLAGS = -fopenmp -g
+CFLAGS = -fopenmp -g -Wall
 OPTS = -c -Wall  
 #files to link:
 LFLAGS = -Trees/BinaryTree.o
@@ -29,6 +29,17 @@ SRCS_Main = $(INPUT).cpp
 SRCS = $(shell find $(SRC) -name '*.cpp')
 SRCDIRS = $(shell find $(SRCDIR) -type d | sed 's/$(SRCDIR)/./g' )
 OBJS    = $(patsubst $(SRC)/%.cpp,$(OBJ)/%.o,$(SRCS))
+
+$(info Current systemparameters set for compilation:  )
+$(info Compiler: $(CC))
+$(info Source Folders paths: $(SRC))
+$(info Object Folders paths: $(OBJ))
+$(info Input executable file: $(INPUT))
+$(info Output executable file: $(OUTPUT))
+$(info Compiled .cpp files: $(SRCS))
+$(info Generated object .o files: $(OBJS))
+
+
 
 all: $(INPUT)
 $(INPUT) : buildrepo $(OBJS)
