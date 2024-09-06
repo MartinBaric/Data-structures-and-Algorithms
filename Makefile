@@ -1,12 +1,18 @@
 # the compiler to use
 CC = g++
 
+# Check if compiler variable exists 
+CHECK_CC := $(shell which $(CC))
+ifndef CHECK_CC 
+$(error $(CHECK_CC) is missing please install or reset)
+endif
+
 # compiler flags:
 #  -g    adds debugging information to the executable file
 #  -Wall turns on most, but not all, compiler warnings
 #  -fopenmp turn on multiprocessing using threads
 CFLAGS   = -fopenmp 
-CFLAGS  += -g
+CFLAGS  += -g 
 #CFLAGS	+=  -Wall
 OPTS 	= -c -Wall  
 #files to link:
@@ -46,6 +52,7 @@ $(info Generated object files: $(OBJS))
 
 # all: $(OBJS)-before compiling the main file create the object files first  
 all: $(OBJS)
+	$(info Make-version used for compilation: $(MAKE_VERSION))
 	$(CC) $(INPUT).cpp $(CFLAGS) -o $(OUTPUT) $(OBJS)
 #	$(CC) -c $(SRCS_Main) $(SRCS) -fopenmp 
 # %.o serves a template which replace % with all contents +++% bofere %   

@@ -14,7 +14,7 @@ class BST: public Node<T>
     /* Note: This means. We define the constructor of BST using the definition 
     of the constructor of Node BST(T value)::Node<T>(value);*/
     using Node<T>::Node;
-    BST(T value,bool = false);
+    BST(T value);
     /* Since the C++ 11 Standard constructors can be inherited;
     it takes all the constructors of the parent class BinaryTree*/ 
     BST<T>* getRight() override;

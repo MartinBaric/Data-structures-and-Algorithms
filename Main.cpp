@@ -5,7 +5,7 @@
 #include <omp.h> // OpenMultiProcessing library for parallel programming
 //#include <random>
 #include "Arrays/SortingAlgorithmsOnArrays.h"
-//#include "Trees/BinaryTree.cpp"
+#include "Trees/BinaryTree.cpp"
 #include "Trees/BST.cpp"
 #include "Trees/AVL.cpp"
 #include "Trees/BST.h"
@@ -30,12 +30,25 @@ int main()
     //initializeArray(elementsList, elementsArray);
     //Node<int> *root = new Node<int>(11,true);
     //BST<int> *root = new BST<int>();
-    AVL<int>* root = new AVL<int>(11);
-    root->insert(12);
+    AVL<int>* root = new AVL<int>(15);
+    root->insert(22);
+    root->insert(8);
+    root->insert(18);
+    root->insert(50);
+    root->insert(5);
     root->insert(13);
-    root->inorder();
+    root->insert(55);
+    root->insert(45);
+    root->insert(19);
+    root->insert(16);
+    root->insert(2);
+    root->insert(17);
+    root->deleteNode(15);
+    //root->deleteNode(7);
+    //root->insert(12);
+    //root->insert(13);
     // = new BST<int>(11);
-    root->deleteNode(13);
+    //root->deleteNode(13);
     root->inorder();
     //AVL<int> *root = new AVL<int>(9);
     //RBtree<int> *root = new RBtree<int>(11);
